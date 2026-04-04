@@ -43,7 +43,7 @@ jobs:
         #                         electron-builder                 | keyboard-layout         | keytar                      | fontmanager
         run: |
           sudo apt-get -y update
-          sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev python3-distutils
+          sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev
 
       - name: Install Python for node-gyp (macOS)
         if: runner.os == 'macOS'
@@ -113,6 +113,8 @@ jobs:
       # Workaround: Fix native build failure due to outdated node-gyp version.
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
 
       - name: Fix node-gyp
         run: |
@@ -120,6 +122,8 @@ jobs:
           npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
           node-gyp install
         shell: pwsh
+        env:
+          GYP_MSVS_VERSION: 2022
 
       - name: Cache node_modules
         uses: actions/cache@v5

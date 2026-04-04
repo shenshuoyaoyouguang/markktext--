@@ -25,6 +25,7 @@ jobs:
       # MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CI: "true"
 
     steps:
       - name: Check out Git repository
@@ -98,6 +99,7 @@ jobs:
       # MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CI: "true"
 
     steps:
       - name: Check out Git repository

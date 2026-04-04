@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-13, ubuntu-latest]
+        os: [macos-14, ubuntu-latest]
 
     env:
       DISPLAY: ":99.0"
@@ -111,6 +111,11 @@ jobs:
           cache-dependency-path: yarn.lock
 
       # Workaround: Fix native build failure due to outdated node-gyp version.
+      - name: Install Visual Studio Build Tools
+        run: |
+          choco install visualstudio2022-workload-vctools --package-parameters "--includeRecommended"
+        shell: pwsh
+
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
@@ -124,6 +129,7 @@ jobs:
         shell: pwsh
         env:
           GYP_MSVS_VERSION: 2022
+          npm_config_msvs_version: 2022
 
       - name: Cache node_modules
         uses: actions/cache@v5

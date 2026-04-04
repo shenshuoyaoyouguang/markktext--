@@ -1,4 +1,11 @@
 'use strict'
+
+// Skip postinstall in CI environment to avoid native module build failures
+if (process.env.CI) {
+  console.log('CI detected, skipping postinstall script')
+  process.exit(0)
+}
+
 const fs = require('fs')
 const path = require('path')
 

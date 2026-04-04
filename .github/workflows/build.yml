@@ -50,7 +50,8 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install python@3.11
-          brew link python@3.11
+          echo "/opt/homebrew/opt/python@3.11/libexec/bin" >> $GITHUB_PATH
+          ln -sf /opt/homebrew/opt/python@3.11/libexec/bin/python3.11 /usr/local/bin/python3
 
       - name: Cache node_modules
         uses: actions/cache@v5

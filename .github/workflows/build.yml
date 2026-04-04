@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-13, ubuntu-latest]
 
     env:
       DISPLAY: ":99.0"
@@ -33,7 +33,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 16
           check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock
@@ -43,7 +43,12 @@ jobs:
         #                         electron-builder                 | keyboard-layout         | keytar                      | fontmanager
         run: |
           sudo apt-get -y update
-          sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev
+          sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev python3-distutils
+
+      - name: Install Python for node-gyp (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install python@3.11
 
       - name: Cache node_modules
         uses: actions/cache@v5
@@ -100,12 +105,15 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 16
           check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock
 
       # Workaround: Fix native build failure due to outdated node-gyp version.
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
       - name: Fix node-gyp
         run: |
           npm install --global node-gyp@latest

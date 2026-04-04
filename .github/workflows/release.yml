@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-11, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest]
 
     env:
       DISPLAY: ":99.0"
@@ -28,7 +28,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 16
+          node-version: 24
           check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock
@@ -123,7 +123,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 16
+          node-version: 24
           check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock

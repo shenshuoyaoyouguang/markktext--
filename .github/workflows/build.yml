@@ -49,6 +49,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install python@3.11
+          brew link python@3.11
 
       - name: Cache node_modules
         uses: actions/cache@v5

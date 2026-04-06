@@ -1,68 +1,85 @@
-export const bulletListMarkerOptions = [{
-  label: '*',
-  value: '*'
-}, {
-  label: '-',
-  value: '-'
-}, {
-  label: '+',
-  value: '+'
-}]
+/**
+ * Markdown 设置选项配置
+ * 使用 i18n 函数动态生成标签文本
+ */
 
-export const orderListDelimiterOptions = [{
-  label: '.',
-  value: '.'
-}, {
-  label: ')',
-  value: ')'
-}]
+export function getBulletListMarkerOptions () {
+  return [{
+    label: '*',
+    value: '*'
+  }, {
+    label: '-',
+    value: '-'
+  }, {
+    label: '+',
+    value: '+'
+  }]
+}
 
-export const preferHeadingStyleOptions = [{
-  label: 'ATX heading',
-  value: 'atx'
-}, {
-  label: 'Setext heading',
-  value: 'setext'
-}]
+export function getOrderListDelimiterOptions () {
+  return [{
+    label: '.',
+    value: '.'
+  }, {
+    label: ')',
+    value: ')'
+  }]
+}
 
-export const listIndentationOptions = [{
-  label: 'DocFX style',
-  value: 'dfm'
-}, {
-  label: 'True tab character',
-  value: 'tab'
-}, {
-  label: 'Single space character',
-  value: 1
-}, {
-  label: 'Two space characters',
-  value: 2
-}, {
-  label: 'Three space characters',
-  value: 3
-}, {
-  label: 'Four space characters',
-  value: 4
-}]
+export function getPreferHeadingStyleOptions (t) {
+  return [{
+    label: t('settings.configOptions.headingStyle.atx'),
+    value: 'atx'
+  }, {
+    label: t('settings.configOptions.headingStyle.setext'),
+    value: 'setext'
+  }]
+}
 
-export const frontmatterTypeOptions = [{
-  label: 'YAML',
-  value: '-'
-}, {
-  label: 'TOML',
-  value: '+'
-}, {
-  label: 'JSON (;;;)',
-  value: ';'
-}, {
-  label: 'JSON ({})',
-  value: '{'
-}]
+export function getListIndentationOptions (t) {
+  return [{
+    label: t('settings.configOptions.listIndentation.docfx'),
+    value: 'dfm'
+  }, {
+    label: t('settings.configOptions.listIndentation.trueTab'),
+    value: 'tab'
+  }, {
+    label: t('settings.configOptions.listIndentation.singleSpace'),
+    value: 1
+  }, {
+    label: t('settings.configOptions.listIndentation.twoSpaces'),
+    value: 2
+  }, {
+    label: t('settings.configOptions.listIndentation.threeSpaces'),
+    value: 3
+  }, {
+    label: t('settings.configOptions.listIndentation.fourSpaces'),
+    value: 4
+  }]
+}
 
-export const sequenceThemeOptions = [{
-  label: 'Hand drawn',
-  value: 'hand'
-}, {
-  label: 'Simple',
-  value: 'simple'
-}]
+export function getFrontmatterTypeOptions (t) {
+  return [{
+    label: t('settings.configOptions.frontmatter.yaml'),
+    value: '-'
+  }, {
+    label: t('settings.configOptions.frontmatter.toml'),
+    value: '+'
+  }, {
+    label: t('settings.configOptions.frontmatter.jsonSemicolon'),
+    value: ';'
+  }, {
+    label: t('settings.configOptions.frontmatter.jsonBrace'),
+    value: '{'
+  }]
+}
+
+export function getSequenceThemeOptions (t) {
+  return [{
+    label: t('settings.configOptions.sequenceTheme.hand'),
+    value: 'hand'
+  }, {
+    label: t('settings.configOptions.sequenceTheme.simple'),
+    value: 'simple'
+  }]
+}

@@ -61,14 +61,16 @@ export default {
   computed: {
     ...mapState({
       rootCommand: state => state.commandCenter.rootCommand
-    })
+    }),
+    defaultPlaceholderText () {
+      return this.$t('dialogs.commandPalette.placeholder')
+    }
   },
   data () {
     this.currentCommand = null
-    this.defaultPlaceholderText = 'Type a command to execute'
     return {
       showCommandPalette: false,
-      placeholderText: this.defaultPlaceholderText,
+      placeholderText: '',
       query: '',
       selectedCommandIndex: -1,
       availableCommands: [],

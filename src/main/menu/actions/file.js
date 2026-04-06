@@ -12,6 +12,7 @@ import { normalizeAndResolvePath, writeFile } from '../../filesystem'
 import { writeMarkdownFile } from '../../filesystem/markdown'
 import { getPath, getRecommendTitleFromMarkdownString } from '../../utils'
 import pandoc from '../../utils/pandoc'
+import { t } from '../../../i18n/mainProcess'
 
 // TODO(refactor): "save" and "save as" should be moved to the editor window (editor.js) and
 // the renderer should communicate only with the editor window for file relevant stuff.
@@ -20,12 +21,12 @@ import pandoc from '../../utils/pandoc'
 const getExportExtensionFilter = type => {
   if (type === 'pdf') {
     return [{
-      name: 'Portable Document Format',
+      name: t('messages.dialogs.export.pdf'),
       extensions: ['pdf']
     }]
   } else if (type === 'styledHtml') {
     return [{
-      name: 'Hypertext Markup Language',
+      name: t('messages.dialogs.export.html'),
       extensions: ['html']
     }]
   }
@@ -84,9 +85,9 @@ const handleResponseForExport = async (e, { type, content, pathname, title, page
       win.webContents.send('mt::export-success', { type, filePath })
     } catch (err) {
       log.error('Error while exporting:', err)
-      const ERROR_MSG = err.message || `Error happened when export ${filePath}`
+      const ERROR_MSG = err.message || t('messages.errors.exportFailedMessage')
       win.webContents.send('mt::show-notification', {
-        title: 'Export failure',
+        title: t('messages.errors.exportFailure'),
         type: 'error',
         message: ERROR_MSG
       })
@@ -161,10 +162,17 @@ const handleResponseForSave = async (e, { id, filename, markdown, pathname, opti
 const showUnsavedFilesMessage = async (win, files) => {
   const { response } = await dialog.showMessageBox(win, {
     type: 'warning',
-    buttons: ['Save', 'Cancel', 'Don\'t save'],
+    buttons: [
+      t('messages.buttons.save'),
+      t('messages.buttons.cancel'),
+      t('messages.buttons.dontSave')
+    ],
     defaultId: 0,
-    message: `Do you want to save the changes you made to ${files.length} ${files.length === 1 ? 'file' : 'files'}?\n\n${files.map(f => f.filename).join('\n')}`,
-    detail: 'Your changes will be lost if you don\'t save them.',
+    message: t('messages.errors.saveChanges', {
+      count: files.length,
+      files: files.length === 1 ? t('messages.dialogs.export.markdown').split(' ')[0] : t('messages.dialogs.export.markdown').split(' ')[0]
+    }) + '\n\n' + files.map(f => f.filename).join('\n'),
+    detail: t('messages.errors.saveChangesDetail'),
     cancelId: 1,
     noLink: true
   })
@@ -185,9 +193,9 @@ const showUnsavedFilesMessage = async (win, files) => {
 
 const noticePandocNotFound = win => {
   return win.webContents.send('mt::pandoc-not-exists', {
-    title: 'Import Warning',
+    title: t('messages.errors.importWarning'),
     type: 'warning',
-    message: 'Install pandoc before you want to import files.',
+    message: t('messages.errors.pandocNotFound'),
     time: 10000
   })
 }
@@ -300,8 +308,11 @@ ipcMain.on('mt::close-window-confirm', async (e, unsavedFiles) => {
         // Notify user about the problem.
         dialog.showMessageBox(win, {
           type: 'error',
-          buttons: ['Close', 'Keep It Open'],
-          message: 'Failure while saving files',
+          buttons: [
+            t('messages.buttons.close'),
+            t('messages.buttons.keepItOpen')
+          ],
+          message: t('messages.errors.saveFailure'),
           detail: err.message
         })
           .then(({ response }) => {
@@ -367,9 +378,12 @@ ipcMain.on('mt::rename', async (e, { id, pathname, newPathname }) => {
   } else {
     const { response } = await dialog.showMessageBox(win, {
       type: 'warning',
-      buttons: ['Replace', 'Cancel'],
+      buttons: [
+        t('messages.buttons.replace'),
+        t('messages.buttons.cancel')
+      ],
       defaultId: 1,
-      message: `The file "${path.basename(newPathname)}" already exists. Do you want to replace it?`,
+      message: t('messages.errors.fileExists', { filename: path.basename(newPathname) }),
       cancelId: 1,
       noLink: true
     })
@@ -383,8 +397,8 @@ ipcMain.on('mt::rename', async (e, { id, pathname, newPathname }) => {
 ipcMain.on('mt::response-file-move-to', async (e, { id, pathname }) => {
   const win = BrowserWindow.fromWebContents(e.sender)
   const { filePath, canceled } = await dialog.showSaveDialog(win, {
-    buttonLabel: 'Move to',
-    nameFieldLabel: 'Filename:',
+    buttonLabel: t('messages.buttons.moveTo'),
+    nameFieldLabel: t('messages.buttons.filename'),
     defaultPath: pathname
   })
 
@@ -494,7 +508,7 @@ export const importFile = async win => {
   const { filePaths } = await dialog.showOpenDialog(win, {
     properties: ['openFile'],
     filters: [{
-      name: 'All Files',
+      name: t('messages.dialogs.export.allFiles'),
       extensions: PANDOC_EXTENSIONS
     }]
   })
@@ -514,7 +528,7 @@ export const openFile = async win => {
   const { filePaths } = await dialog.showOpenDialog(win, {
     properties: ['openFile', 'multiSelections'],
     filters: [{
-      name: 'Markdown document',
+      name: t('messages.dialogs.export.markdown'),
       extensions: MARKDOWN_EXTENSIONS
     }]
   })

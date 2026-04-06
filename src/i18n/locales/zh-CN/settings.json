@@ -1,0 +1,292 @@
+{
+  "settings": {
+    "sidebar": {
+      "title": "偏好设置",
+      "searchPlaceholder": "搜索设置",
+      "categories": {
+        "general": "通用",
+        "editor": "编辑器",
+        "markdown": "Markdown",
+        "spelling": "拼写检查",
+        "theme": "主题",
+        "image": "图片",
+        "keybindings": "快捷键"
+      }
+    },
+    "general": {
+      "title": "通用",
+      "autoSave": {
+        "title": "自动保存",
+        "description": "自动保存文档更改",
+        "delayDescription": "文档编辑后延迟自动保存的时间"
+      },
+      "window": {
+        "title": "窗口",
+        "titleBarStyle": "标题栏样式",
+        "requiresRestart": "需要重启",
+        "hideScrollbars": "隐藏滚动条",
+        "openFilesInNewWindow": "在新窗口中打开文件",
+        "openFoldersInNewWindow": "在新窗口中打开文件夹",
+        "zoom": "缩放"
+      },
+      "sidebar": {
+        "title": "侧边栏",
+        "wrapTextInToc": "在目录中换行文本",
+        "sortField": "打开文件夹中文件的排序字段"
+      },
+      "startup": {
+        "title": "启动时操作",
+        "restoreSession": "恢复上次编辑器会话",
+        "openDefaultDir": "打开默认目录",
+        "selectFolder": "选择文件夹",
+        "openBlank": "打开空白页"
+      },
+      "misc": {
+        "title": "其他",
+        "language": "用户界面语言"
+      }
+    },
+    "editor": {
+      "title": "编辑器",
+      "textEditor": {
+        "title": "文本编辑器设置",
+        "fontSize": "字体大小",
+        "lineHeight": "行高",
+        "fontFamily": "字体",
+        "lineWidth": "文本编辑器最大宽度",
+        "lineWidthNotes": "留空使用主题默认值，否则使用带单位后缀的数字，单位可以是'ch'（字符）、'px'（像素）或'%'（百分比）"
+      },
+      "codeBlock": {
+        "title": "代码块设置",
+        "fontSize": "字体大小",
+        "fontFamily": "字体",
+        "showLineNumbers": "显示行号",
+        "trimEmptyLines": "删除首尾空行"
+      },
+      "writing": {
+        "title": "写作行为",
+        "autoPairBracket": "书写时自动闭合括号",
+        "autoPairMarkdown": "自动补全Markdown语法",
+        "autoPairQuote": "自动闭合引号"
+      },
+      "fileRepresentation": {
+        "title": "文件表示",
+        "tabWidth": "首选制表符宽度",
+        "lineSeparator": "行分隔符类型",
+        "defaultEncoding": "默认编码",
+        "autoGuessEncoding": "自动检测文件编码",
+        "trailingNewline": "尾随换行符处理"
+      },
+      "misc": {
+        "title": "其他",
+        "textDirection": "文本方向",
+        "hideQuickInsertHint": "隐藏选择新段落类型的提示",
+        "hideLinkPopup": "光标悬停在链接上时隐藏弹出窗口",
+        "autoCheck": "是否自动检查相关任务"
+      }
+    },
+    "spellchecker": {
+      "title": "拼写检查",
+      "enableSpellchecking": "启用拼写检查",
+      "hideMarks": "隐藏拼写错误标记",
+      "autoDetectLanguage": "自动检测文档语言",
+      "defaultLanguage": "拼写检查默认语言",
+      "autoDetectNote": "输入时会自动检测使用的语言。其他语言可通过系统偏好设置中的\"语言与区域\"添加。",
+      "customDictionary": {
+        "title": "自定义词典",
+        "description": "编辑自定义词典中的单词",
+        "emptyText": "暂无可用单词",
+        "word": "单词",
+        "options": "操作",
+        "delete": "删除"
+      },
+      "errors": {
+        "failedToSwitchLanguage": "切换语言失败",
+        "failedToRemoveWord": "删除自定义单词失败",
+        "unexpectedError": "保存时发生意外错误"
+      }
+    },
+    "markdown": {
+      "title": "Markdown",
+      "lists": {
+        "title": "列表",
+        "preferLooseList": "首选宽松列表项",
+        "bulletMarker": "无序列表首选标记",
+        "orderListDelimiter": "有序列表分隔符",
+        "listIndentation": "首选列表缩进"
+      },
+      "extensions": {
+        "title": "Markdown扩展",
+        "frontmatter": "Front matter格式",
+        "superSubScript": "启用Pandoc风格上标和下标",
+        "footnote": "启用Pandoc风格脚注"
+      },
+      "compatibility": {
+        "title": "兼容性",
+        "htmlRendering": "启用HTML渲染",
+        "gitlabCompatibility": "启用GitLab兼容模式"
+      },
+      "diagrams": {
+        "title": "图表",
+        "sequenceTheme": "序列图主题"
+      },
+      "misc": {
+        "title": "其他",
+        "headingStyle": "首选标题样式"
+      }
+    },
+    "theme": {
+      "title": "主题",
+      "autoSwitchDescription": "根据系统设置自动调整应用主题",
+      "openFolder": "打开主题文件夹",
+      "openFolderButton": "打开文件夹",
+      "importTheme": "导入自定义主题",
+      "importThemeButton": "导入主题"
+    },
+    "image": {
+      "title": "图片",
+      "defaultAction": "从本地文件夹或剪贴板插入图片后的默认操作",
+      "clipboardNote": "剪贴板处理仅在macOS和Windows上完全支持",
+      "folder": {
+        "title": "全局或相对图片文件夹",
+        "globalFolder": "全局图片文件夹",
+        "open": "打开...",
+        "showInFolder": "在文件夹中显示",
+        "preferRelative": "首选相对资源文件夹",
+        "relativeName": "相对图片文件夹名称",
+        "filenameNote": "在上方文本框中包含 ${filename} 可自动插入文档文件名"
+      },
+      "uploader": {
+        "title": "上传器",
+        "currentUploader": "当前图片上传器是",
+        "noUploaderSelected": "当前未选择上传器。请选择并配置一个上传器。",
+        "picgoNotInstalled": "您的系统未安装",
+        "installBeforeUse": "请在使用前安装",
+        "githubWillBeRemoved": "GitHub将在未来版本中移除，请使用picgo",
+        "githubToken": "GitHub令牌",
+        "githubTokenNote": "令牌在macOS上通过Keychain保存，在Linux上使用Secret Service API/libsecret，在Windows上使用Credential Vault",
+        "inputToken": "输入令牌",
+        "ownerName": "所有者名称",
+        "owner": "所有者",
+        "repoName": "仓库名称",
+        "repo": "仓库",
+        "branchName": "分支名称",
+        "branch": "分支",
+        "optional": "可选",
+        "save": "保存",
+        "scriptDescription": "脚本将以图片文件路径作为唯一参数执行，它应该输出HTMLImageElement的src属性的任何有效值",
+        "scriptLocation": "Shell脚本位置",
+        "scriptPath": "脚本绝对路径",
+        "saveConfig": "保存配置",
+        "githubSaved": "GitHub配置已保存",
+        "scriptSaved": "命令行脚本配置已保存",
+        "legalNotices": {
+          "prefix": "使用",
+          "middle": "即表示您同意",
+          "privacy": "隐私声明",
+          "and": "和",
+          "terms": "服务条款",
+          "gdpr": "此服务因GDPR问题无法在欧洲使用"
+        }
+      }
+    },
+    "keybindings": {
+      "title": "快捷键",
+      "description": "自定义MarkText快捷键并点击保存按钮应用所有更改（需要重启）。所有可用和默认快捷键可在",
+      "online": "在线",
+      "keyCombination": "按键组合",
+      "options": "操作",
+      "edit": "编辑",
+      "reset": "重置",
+      "unbind": "解绑",
+      "save": "保存",
+      "restoreDefaults": "恢复默认快捷键",
+      "debugOptions": "调试选项",
+      "dumpKeyboard": "转储键盘信息",
+      "keyInputDialog": {
+        "placeholder": "按下按键组合",
+        "pressEnter": "按Enter键继续或ESC键退出",
+        "invalidCombination": "当前按键组合无法绑定！"
+      },
+      "errors": {
+        "failedToSave": "保存失败",
+        "unexpectedError": "保存时发生意外错误",
+        "shortcutInUse": "快捷键已被占用",
+        "shortcutInUseMessage": "快捷键\"{{accelerator}}\"已被使用。请先取消该快捷键后重试。"
+      }
+    },
+    "common": {
+      "selectFont": "选择字体..."
+    },
+    "configOptions": {
+      "titleBarStyle": {
+        "custom": "自定义",
+        "native": "原生"
+      },
+      "zoom": {
+        "percent": "{{value}}%"
+      },
+      "fileSortBy": {
+        "created": "创建时间",
+        "modified": "修改时间",
+        "title": "标题"
+      },
+      "language": {
+        "english": "English",
+        "chinese": "简体中文"
+      },
+      "endOfLine": {
+        "default": "默认",
+        "crlf": "回车换行 (CRLF)",
+        "lf": "换行 (LF)"
+      },
+      "trimTrailingNewline": {
+        "trimAll": "删除所有尾随行",
+        "ensureOne": "确保恰好一个尾随行",
+        "preserve": "保留原文档风格",
+        "doNothing": "不处理"
+      },
+      "textDirection": {
+        "ltr": "从左到右",
+        "rtl": "从右到左"
+      },
+      "headingStyle": {
+        "atx": "ATX 标题",
+        "setext": "Setext 标题"
+      },
+      "listIndentation": {
+        "docfx": "DocFX 风格",
+        "trueTab": "真正的制表符",
+        "singleSpace": "单个空格字符",
+        "twoSpaces": "两个空格字符",
+        "threeSpaces": "三个空格字符",
+        "fourSpaces": "四个空格字符"
+      },
+      "frontmatter": {
+        "yaml": "YAML",
+        "toml": "TOML",
+        "jsonSemicolon": "JSON (;;)",
+        "jsonBrace": "JSON ({})"
+      },
+      "sequenceTheme": {
+        "hand": "手绘风格",
+        "simple": "简洁风格"
+      },
+      "autoSwitchTheme": {
+        "adjustAtStartup": "启动时调整主题",
+        "never": "从不"
+      },
+      "imageActions": {
+        "upload": "使用所选上传器上传图片到云端（需在下方配置）",
+        "folder": "复制图片到指定的相对资源或全局本地文件夹",
+        "path": "保持原始位置"
+      },
+      "uploaderServices": {
+        "none": "无",
+        "picgo": "Picgo",
+        "github": "GitHub",
+        "cliScript": "命令行脚本"
+      }
+    }
+  }
+}

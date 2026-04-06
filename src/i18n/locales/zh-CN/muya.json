@@ -1,0 +1,194 @@
+{
+  "muya": {
+    "quickInsert": {
+      "placeholder": "输入 / 插入...",
+      "noResult": "无结果",
+      "categories": {
+        "basicBlock": "基础区块",
+        "header": "标题",
+        "advancedBlock": "高级区块",
+        "listBlock": "列表区块",
+        "diagram": "图表"
+      },
+      "items": {
+        "paragraph": {
+          "title": "段落",
+          "subTitle": "普通文本段落"
+        },
+        "horizontalLine": {
+          "title": "水平线",
+          "subTitle": "---"
+        },
+        "frontMatter": {
+          "title": "Front Matter",
+          "subTitle": "--- 元数据 ---"
+        },
+        "header1": {
+          "title": "标题 1",
+          "subTitle": "# 一级标题 ..."
+        },
+        "header2": {
+          "title": "标题 2",
+          "subTitle": "## 二级标题 ..."
+        },
+        "header3": {
+          "title": "标题 3",
+          "subTitle": "### 三级标题 ..."
+        },
+        "header4": {
+          "title": "标题 4",
+          "subTitle": "#### 四级标题 ..."
+        },
+        "header5": {
+          "title": "标题 5",
+          "subTitle": "##### 五级标题 ..."
+        },
+        "header6": {
+          "title": "标题 6",
+          "subTitle": "###### 六级标题 ..."
+        },
+        "tableBlock": {
+          "title": "表格",
+          "subTitle": "|列1 | 列2 |"
+        },
+        "displayMath": {
+          "title": "数学公式",
+          "subTitle": "$$ 数学公式 $$"
+        },
+        "htmlBlock": {
+          "title": "HTML 区块",
+          "subTitle": "<div> HTML 内容 </div>"
+        },
+        "codeBlock": {
+          "title": "代码块",
+          "subTitle": "```java 代码内容 ```"
+        },
+        "quoteBlock": {
+          "title": "引用块",
+          "subTitle": "> 引用内容 ..."
+        },
+        "orderList": {
+          "title": "有序列表",
+          "subTitle": "1. 列表项 ..."
+        },
+        "bulletList": {
+          "title": "无序列表",
+          "subTitle": "- 列表项 ..."
+        },
+        "todoList": {
+          "title": "待办列表",
+          "subTitle": "- [x] 待办事项 ..."
+        },
+        "vegaChart": {
+          "title": "Vega 图表",
+          "subTitle": "使用 vega-lite.js 渲染数据图表。"
+        },
+        "flowChart": {
+          "title": "流程图",
+          "subTitle": "使用 flowchart.js 渲染流程图。"
+        },
+        "sequenceDiagram": {
+          "title": "时序图",
+          "subTitle": "使用 js-sequence 渲染时序图。"
+        },
+        "plantumlDiagram": {
+          "title": "PlantUML 图",
+          "subTitle": "渲染 PlantUML 图表"
+        },
+        "mermaid": {
+          "title": "Mermaid",
+          "subTitle": "使用 mermaid 渲染图表。"
+        }
+      }
+    },
+    "frontMenu": {
+      "duplicate": "复制",
+      "turnInto": "转换为",
+      "newParagraph": "新建段落",
+      "delete": "删除"
+    },
+    "imageSelector": {
+      "tabs": {
+        "select": "选择",
+        "embedLink": "嵌入链接",
+        "unsplash": "Unsplash"
+      },
+      "placeholders": {
+        "altText": "替代文本",
+        "imageLink": "图片链接或本地路径",
+        "imageTitle": "图片标题",
+        "searchUnsplash": "搜索 Unsplash 图片"
+      },
+      "buttons": {
+        "chooseImage": "选择图片",
+        "embedImage": "嵌入图片"
+      },
+      "descriptions": {
+        "chooseFromComputer": "从您的电脑中选择图片。",
+        "pasteLink": "粘贴网络图片或本地图片路径。使用 ",
+        "simpleMode": "简单模式",
+        "fullMode": "完整模式",
+        "noResult": "无结果...",
+        "searchMore": "搜索更多图片...",
+        "by": "作者 "
+      }
+    },
+    "imageToolbar": {
+      "edit": "编辑图片",
+      "inline": "行内图片",
+      "left": "左对齐",
+      "center": "居中对齐",
+      "right": "右对齐",
+      "delete": "删除图片"
+    },
+    "tableTools": {
+      "insertRowAbove": "在上方插入行",
+      "insertRowBelow": "在下方插入行",
+      "removeRow": "删除行",
+      "insertColumnLeft": "在左侧插入列",
+      "insertColumnRight": "在右侧插入列",
+      "removeColumn": "删除列",
+      "resizeTable": "调整表格大小",
+      "alignLeft": "左对齐",
+      "alignCenter": "居中对齐",
+      "alignRight": "右对齐",
+      "deleteTable": "删除表格"
+    },
+    "footnoteTool": {
+      "notFound": "找不到语法为 [^abc] 的脚注：",
+      "placeholder": "输入脚注定义...",
+      "goTo": "跳转到",
+      "create": "创建"
+    },
+    "tablePicker": {
+      "rows": "行",
+      "columns": "列"
+    },
+    "codePicker": {
+      "placeholder": "选择语言...",
+      "noResult": "无结果"
+    },
+    "emojiPicker": {
+      "placeholder": "搜索表情..."
+    },
+    "linkTools": {
+      "placeholder": "输入链接..."
+    },
+    "buttons": {
+      "ok": "确定",
+      "cancel": "取消"
+    },
+    "formatPicker": {
+      "strong": "粗体",
+      "em": "斜体",
+      "u": "下划线",
+      "del": "删除线",
+      "inline_code": "代码",
+      "link": "链接",
+      "image": "图片",
+      "mark": "高亮",
+      "inline_math": "行内数学公式",
+      "clear": "清除格式"
+    }
+  }
+}

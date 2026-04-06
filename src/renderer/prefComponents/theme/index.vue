@@ -1,6 +1,6 @@
 <template>
   <div class="pref-theme">
-    <h4>Theme</h4>
+    <h4>{{ $t('settings.theme.title') }}</h4>
     <section class="offcial-themes">
       <div v-for="t of themes" :key="t.name" class="theme"
         :class="[t.name, { 'active': t.name === theme }]"
@@ -11,7 +11,7 @@
     </section>
     <separator></separator>
     <cur-select
-      description="Automatically adjust application theme according to system settings"
+      :description="$t('settings.theme.autoSwitchDescription')"
       :value="autoSwitchTheme"
       :options="autoSwitchThemeOptions"
       :onChange="value => onSelectChange('autoSwitchTheme', value)"
@@ -19,13 +19,13 @@
     <separator v-show="false"></separator>
     <section v-show="false" class="import-themes ag-underdevelop">
       <div>
-        <span>Open the themes folder</span>
-        <el-button size="small">Open Folder</el-button>
+        <span>{{ $t('settings.theme.openFolder') }}</span>
+        <el-button size="small">{{ $t('settings.theme.openFolderButton') }}</el-button>
       </div>
 
       <div>
-        <span>Import custom themes</span>
-        <el-button size="small">Import Theme</el-button>
+        <span>{{ $t('settings.theme.importTheme') }}</span>
+        <el-button size="small">{{ $t('settings.theme.importThemeButton') }}</el-button>
       </div>
     </section>
   </div>
@@ -34,10 +34,11 @@
 <script>
 import { mapState } from 'vuex'
 import themeMd from './theme.md'
-import { autoSwitchThemeOptions, themes } from './config'
+import { getAutoSwitchThemeOptions, themes } from './config'
 import markdownToHtml from '@/util/markdownToHtml'
 import CurSelect from '../common/select'
 import Separator from '../common/separator'
+import { getI18n } from '@/i18n/renderer'
 
 export default {
   components: {
@@ -45,7 +46,9 @@ export default {
     Separator
   },
   data () {
-    this.autoSwitchThemeOptions = autoSwitchThemeOptions
+    const i18n = getI18n()
+    const t = (key) => i18n ? i18n.t(key) : key
+    this.autoSwitchThemeOptions = getAutoSwitchThemeOptions(t)
     return {
       themes: []
     }
@@ -54,7 +57,11 @@ export default {
     ...mapState({
       autoSwitchTheme: state => state.preferences.autoSwitchTheme,
       theme: state => state.preferences.theme
-    })
+    }),
+    // 使用计算属性动态生成选项，支持语言切换
+    autoSwitchThemeOptions () {
+      return getAutoSwitchThemeOptions(this.$t)
+    }
   },
   created () {
     this.$nextTick(async () => {

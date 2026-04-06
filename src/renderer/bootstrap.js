@@ -23,6 +23,7 @@ const parseUrlArgs = () => {
   const hideScrollbar = params.get('hsb') === '1'
   const theme = params.get('theme')
   const titleBarStyle = params.get('tbs')
+  const language = params.get('lang')
   const userDataPath = params.get('udp')
   const windowId = Number(params.get('wid'))
   const type = params.get('type')
@@ -41,7 +42,8 @@ const parseUrlArgs = () => {
       codeFontSize,
       hideScrollbar,
       theme,
-      titleBarStyle
+      titleBarStyle,
+      language
     }
   }
 }

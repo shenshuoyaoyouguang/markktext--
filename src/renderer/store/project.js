@@ -7,6 +7,7 @@ import { PATH_SEPARATOR } from '../config'
 import notice from '../services/notification'
 import { getFileStateFromData } from './help'
 import { hasMarkdownExtension } from '../../common/filesystem/paths'
+import { t } from '../i18n'
 
 const state = {
   activeItem: {},
@@ -142,7 +143,7 @@ const actions = {
       const { pathname } = state.activeItem
       ipcRenderer.invoke('mt::fs-trash-item', pathname).catch(err => {
         notice.notify({
-          title: 'Error while deleting',
+          title: t('messages.errors.errorWhileDeleting'),
           type: 'error',
           message: err.message
         })
@@ -161,9 +162,9 @@ const actions = {
 
         if (path.normalize(clipboard.src) === path.normalize(clipboard.dest)) {
           notice.notify({
-            title: 'Paste Forbidden',
+            title: t('messages.errors.pasteForbidden'),
             type: 'warning',
-            message: 'Source and destination must not be the same.'
+            message: t('messages.errors.pasteForbidden')
           })
           return
         }
@@ -174,7 +175,7 @@ const actions = {
           })
           .catch(err => {
             notice.notify({
-              title: 'Error while pasting',
+              title: t('messages.errors.errorWhilePasting'),
               type: 'error',
               message: err.message
             })
@@ -206,7 +207,7 @@ const actions = {
       })
       .catch(err => {
         notice.notify({
-          title: 'Error in Side Bar',
+          title: t('messages.errors.errorInSidebar'),
           type: 'error',
           message: err.message
         })

@@ -296,17 +296,18 @@ class ImageSelector extends BaseFloat {
   }
 
   renderHeader () {
+    const { t } = this.muya
     const tabs = [{
-      label: 'Select',
+      label: t('imageSelector.tabs.select'),
       value: 'select'
     }, {
-      label: 'Embed link',
+      label: t('imageSelector.tabs.embedLink'),
       value: 'link'
     }]
 
     if (this.unsplash) {
       tabs.push({
-        label: 'Unsplash',
+        label: t('imageSelector.tabs.unsplash'),
         value: 'unsplash'
       })
     }
@@ -328,6 +329,7 @@ class ImageSelector extends BaseFloat {
   renderBody = () => {
     const { tab, state, isFullMode } = this
     const { alt, title, src } = state
+    const { t } = this.muya
     let bodyContent = null
     if (tab === 'select') {
       bodyContent = [
@@ -337,13 +339,13 @@ class ImageSelector extends BaseFloat {
               this.handleSelectButtonClick()
             }
           }
-        }, 'Choose an Image'),
-        h('span.description', 'Choose image from your computer.')
+        }, t('imageSelector.buttons.chooseImage')),
+        h('span.description', t('imageSelector.descriptions.chooseFromComputer'))
       ]
     } else if (tab === 'link') {
       const altInput = h('input.alt', {
         props: {
-          placeholder: 'Alt text',
+          placeholder: t('imageSelector.placeholders.altText'),
           value: alt
         },
         on: {
@@ -360,7 +362,7 @@ class ImageSelector extends BaseFloat {
       })
       const srcInput = h('input.src', {
         props: {
-          placeholder: 'Image link or local path',
+          placeholder: t('imageSelector.placeholders.imageLink'),
           value: src
         },
         on: {
@@ -380,7 +382,7 @@ class ImageSelector extends BaseFloat {
       })
       const titleInput = h('input.title', {
         props: {
-          placeholder: 'Image title',
+          placeholder: t('imageSelector.placeholders.imageTitle'),
           value: title
         },
         on: {
@@ -406,22 +408,22 @@ class ImageSelector extends BaseFloat {
             this.handleLinkButtonClick()
           }
         }
-      }, 'Embed Image')
+      }, t('imageSelector.buttons.embedImage'))
       const bottomDes = h('span.description', [
-        h('span', 'Paste web image or local image path. Use '),
+        h('span', t('imageSelector.descriptions.pasteLink')),
         h('a', {
           on: {
             click: event => {
               this.toggleMode()
             }
           }
-        }, `${isFullMode ? 'simple mode' : 'full mode'}.`)
+        }, `${isFullMode ? t('imageSelector.descriptions.simpleMode') : t('imageSelector.descriptions.fullMode')}.`)
       ])
       bodyContent = [inputWrapper, embedButton, bottomDes]
     } else {
       const searchInput = h('input.search', {
         props: {
-          placeholder: 'Search photos on Unsplash'
+          placeholder: t('imageSelector.placeholders.searchUnsplash')
         },
         on: {
           keydown: (event) => {
@@ -439,7 +441,7 @@ class ImageSelector extends BaseFloat {
         const loadingCom = h('div.ag-plugin-loading')
         bodyContent.push(loadingCom)
       } else if (this.photoList.length === 0) {
-        const noDataCom = h('div.no-data', 'No result...')
+        const noDataCom = h('div.no-data', t('imageSelector.descriptions.noResult'))
         bodyContent.push(noDataCom)
       } else {
         const photos = this.photoList.map(photo => {
@@ -484,7 +486,7 @@ class ImageSelector extends BaseFloat {
           return h('div.photo', [imageWrapper, desCom])
         })
         const photoWrapper = h('div.photos-wrapper', photos)
-        const moreCom = h('div.more', 'Search for more photos...')
+        const moreCom = h('div.more', t('imageSelector.descriptions.searchMore'))
         bodyContent.push(photoWrapper, moreCom)
       }
     }

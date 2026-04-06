@@ -1,18 +1,32 @@
 import { Menu, MenuItem } from 'electron'
 import {
-  CUT,
-  COPY,
-  PASTE,
-  COPY_AS_MARKDOWN,
-  COPY_AS_HTML,
-  PASTE_AS_PLAIN_TEXT,
-  SEPARATOR,
-  INSERT_BEFORE,
-  INSERT_AFTER
+  createCutMenuItem,
+  createCopyMenuItem,
+  createPasteMenuItem,
+  createCopyAsMarkdownMenuItem,
+  createCopyAsHtmlMenuItem,
+  createPasteAsPlainTextMenuItem,
+  createInsertBeforeMenuItem,
+  createInsertAfterMenuItem,
+  SEPARATOR
 } from './menuItems'
 import spellcheckMenuBuilder from './spellcheck'
+import { t } from '../../../i18n/mainProcess'
 
-const CONTEXT_ITEMS = [INSERT_BEFORE, INSERT_AFTER, SEPARATOR, CUT, COPY, PASTE, SEPARATOR, COPY_AS_MARKDOWN, COPY_AS_HTML, PASTE_AS_PLAIN_TEXT]
+const createContextItems = () => {
+  return [
+    createInsertBeforeMenuItem(),
+    createInsertAfterMenuItem(),
+    SEPARATOR,
+    createCutMenuItem(),
+    createCopyMenuItem(),
+    createPasteMenuItem(),
+    SEPARATOR,
+    createCopyAsMarkdownMenuItem(),
+    createCopyAsHtmlMenuItem(),
+    createPasteAsPlainTextMenuItem()
+  ]
+}
 
 const isInsideEditor = params => {
   const { isEditable, editFlags, inputFieldType } = params
@@ -37,16 +51,18 @@ export const showEditorContextMenu = (win, event, params, isSpellcheckerEnabled)
     if (isSpellcheckerEnabled) {
       const spellingSubmenu = spellcheckMenuBuilder(isMisspelled, misspelledWord, dictionarySuggestions)
       menu.append(new MenuItem({
-        label: 'Spelling...',
+        label: t('messages.contextMenu.spelling'),
         submenu: spellingSubmenu
       }))
       menu.append(new MenuItem(SEPARATOR))
     }
 
-    [CUT, COPY, COPY_AS_HTML, COPY_AS_MARKDOWN].forEach(item => {
-      item.enabled = canCopy
-    })
-    CONTEXT_ITEMS.forEach(item => {
+    const contextItems = createContextItems()
+    contextItems.filter(item => item.id && /cutMenuItem|copyMenuItem|copyAsHtmlMenuItem|copyAsMarkdownMenuItem/.test(item.id))
+      .forEach(item => {
+        item.enabled = canCopy
+      })
+    contextItems.forEach(item => {
       menu.append(new MenuItem(item))
     })
     menu.popup([{ window: win, x: event.clientX, y: event.clientY }])

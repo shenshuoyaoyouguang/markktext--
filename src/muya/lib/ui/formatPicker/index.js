@@ -70,7 +70,7 @@ class FormatPicker extends BaseFloat {
       }
       return h(itemSelector, {
         attrs: {
-          title: `${i.tooltip} ${i.shortcut}`
+          title: `${this.muya.t(`formatPicker.${i.type}`)} ${i.shortcut}`
         },
         on: {
           click: event => {

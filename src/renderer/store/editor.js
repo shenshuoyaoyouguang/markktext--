@@ -7,6 +7,7 @@ import { hasKeys, getUniqueId } from '../util'
 import listToTree from '../util/listToTree'
 import { createDocumentState, getOptionsFromState, getSingleFileState, getBlankFileState } from './help'
 import notice from '../services/notification'
+import { t } from '../i18n'
 import {
   FileEncodingCommand,
   LineEndingCommand,
@@ -119,8 +120,8 @@ const mutations = {
       // The tab may be closed in the meanwhile.
       console.error('LOAD_CHANGE: Cannot find tab in tab list.')
       notice.notify({
-        title: 'Error loading tab',
-        message: 'There was an error while loading the file change because the tab cannot be found.',
+        title: t('messages.errors.loadTabError'),
+        message: t('messages.errors.loadTabMessage'),
         type: 'error',
         time: 20000,
         showConfirm: false
@@ -370,8 +371,8 @@ const actions = {
 
   SHOW_IMAGE_DELETION_URL ({ commit }, deletionUrl) {
     notice.notify({
-      title: 'Image deletion URL',
-      message: `Click to copy the deletion URL of the uploaded image to the clipboard (${deletionUrl}).`,
+      title: t('messages.notifications.imageDeletionUrl'),
+      message: t('messages.notifications.imageDeletionUrlMessage', { deletionUrl }),
       showConfirm: true,
       time: 20000
     })
@@ -1072,8 +1073,8 @@ const actions = {
   LINTEN_FOR_EXPORT_SUCCESS ({ commit }) {
     ipcRenderer.on('mt::export-success', (e, { type, filePath }) => {
       notice.notify({
-        title: 'Exported successfully',
-        message: `Exported "${path.basename(filePath)}" successfully!`,
+        title: t('messages.notifications.exportSuccess'),
+        message: t('messages.notifications.exportSuccessMessage', { filename: path.basename(filePath) }),
         showConfirm: true
       })
         .then(() => {

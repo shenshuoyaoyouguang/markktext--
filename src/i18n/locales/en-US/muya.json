@@ -1,0 +1,189 @@
+{
+  "muya": {
+    "quickInsert": {
+      "placeholder": "Type / to insert...",
+      "noResult": "No result",
+      "categories": {
+        "basicBlock": "Basic Block",
+        "header": "Header",
+        "advancedBlock": "Advanced Block",
+        "listBlock": "List Block",
+        "diagram": "Diagram"
+      },
+      "items": {
+        "paragraph": {
+          "title": "Paragraph",
+          "subTitle": "Lorem Ipsum is simply dummy text"
+        },
+        "horizontalLine": {
+          "title": "Horizontal Line",
+          "subTitle": "---"
+        },
+        "frontMatter": {
+          "title": "Front Matter",
+          "subTitle": "--- Lorem Ipsum ---"
+        },
+        "header1": {
+          "title": "Header 1",
+          "subTitle": "# Lorem Ipsum is simply ..."
+        },
+        "header2": {
+          "title": "Header 2",
+          "subTitle": "## Lorem Ipsum is simply ..."
+        },
+        "header3": {
+          "title": "Header 3",
+          "subTitle": "### Lorem Ipsum is simply ..."
+        },
+        "header4": {
+          "title": "Header 4",
+          "subTitle": "#### Lorem Ipsum is simply ..."
+        },
+        "header5": {
+          "title": "Header 5",
+          "subTitle": "##### Lorem Ipsum is simply ..."
+        },
+        "header6": {
+          "title": "Header 6",
+          "subTitle": "###### Lorem Ipsum is simply ..."
+        },
+        "tableBlock": {
+          "title": "Table Block",
+          "subTitle": "|Lorem | Ipsum is simply |"
+        },
+        "displayMath": {
+          "title": "Display Math",
+          "subTitle": "$$ Lorem Ipsum is simply $$"
+        },
+        "htmlBlock": {
+          "title": "HTML Block",
+          "subTitle": "<div> Lorem Ipsum is simply </div>"
+        },
+        "codeBlock": {
+          "title": "Code Block",
+          "subTitle": "```java Lorem Ipsum is simply ```"
+        },
+        "quoteBlock": {
+          "title": "Quote Block",
+          "subTitle": ">Lorem Ipsum is simply ..."
+        },
+        "orderList": {
+          "title": "Order List",
+          "subTitle": "1. Lorem Ipsum is simply ..."
+        },
+        "bulletList": {
+          "title": "Bullet List",
+          "subTitle": "- Lorem Ipsum is simply ..."
+        },
+        "todoList": {
+          "title": "To-do List",
+          "subTitle": "- [x] Lorem Ipsum is simply ..."
+        },
+        "vegaChart": {
+          "title": "Vega Chart",
+          "subTitle": "Render flow chart by vega-lite.js."
+        },
+        "flowChart": {
+          "title": "Flow Chart",
+          "subTitle": "Render flow chart by flowchart.js."
+        },
+        "sequenceDiagram": {
+          "title": "Sequence Diagram",
+          "subTitle": "Render sequence diagram by js-sequence."
+        },
+        "plantumlDiagram": {
+          "title": "PlantUML Diagram",
+          "subTitle": "Render PlantUML diagrams"
+        },
+        "mermaid": {
+          "title": "Mermaid",
+          "subTitle": "Render Diagram by mermaid."
+        }
+      }
+    },
+    "frontMenu": {
+      "duplicate": "Duplicate",
+      "turnInto": "Turn Into",
+      "newParagraph": "New Paragraph",
+      "delete": "Delete"
+    },
+    "imageSelector": {
+      "tabs": {
+        "select": "Select",
+        "embedLink": "Embed link",
+        "unsplash": "Unsplash"
+      },
+      "placeholders": {
+        "altText": "Alt text",
+        "imageLink": "Image link or local path",
+        "imageTitle": "Image title",
+        "searchUnsplash": "Search photos on Unsplash"
+      },
+      "buttons": {
+        "chooseImage": "Choose an Image",
+        "embedImage": "Embed Image"
+      },
+      "descriptions": {
+        "chooseFromComputer": "Choose image from your computer.",
+        "pasteLink": "Paste web image or local image path. Use ",
+        "simpleMode": "simple mode",
+        "fullMode": "full mode",
+        "noResult": "No result...",
+        "searchMore": "Search for more photos...",
+        "by": "By "
+      }
+    },
+    "imageToolbar": {
+      "edit": "Edit Image",
+      "inline": "Inline Image",
+      "left": "Align Left",
+      "center": "Align Middle",
+      "right": "Align Right",
+      "delete": "Remove Image"
+    },
+    "tableTools": {
+      "insertRowAbove": "Insert Row Above",
+      "insertRowBelow": "Insert Row Below",
+      "removeRow": "Remove Row",
+      "insertColumnLeft": "Insert Column Left",
+      "insertColumnRight": "Insert Column Right",
+      "removeColumn": "Remove Column"
+    },
+    "footnoteTool": {
+      "notFound": "Can't find footnote with syntax [^abc]:",
+      "placeholder": "Input the footnote definition...",
+      "goTo": "Go to",
+      "create": "Create"
+    },
+    "tablePicker": {
+      "rows": "Rows",
+      "columns": "Columns"
+    },
+    "codePicker": {
+      "placeholder": "Select language...",
+      "noResult": "No result"
+    },
+    "emojiPicker": {
+      "placeholder": "Search emoji..."
+    },
+    "linkTools": {
+      "placeholder": "Enter link..."
+    },
+    "buttons": {
+      "ok": "OK",
+      "cancel": "Cancel"
+    },
+    "formatPicker": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "code": "Code",
+      "link": "Link",
+      "image": "Image",
+      "highlight": "Highlight",
+      "math": "Inline Math",
+      "clear": "Clear Formatting"
+    }
+  }
+}

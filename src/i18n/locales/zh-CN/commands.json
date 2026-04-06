@@ -1,0 +1,160 @@
+{
+  "commands": {
+    "mt": {
+      "hide": "MarkText：隐藏 MarkText",
+      "hideOthers": "MarkText：隐藏其他"
+    },
+    "file": {
+      "newWindow": "文件：新建窗口",
+      "newTab": "文件：新建标签页",
+      "openFile": "文件：打开文件",
+      "openFolder": "文件：打开文件夹",
+      "save": "文件：保存",
+      "saveAs": "文件：另存为...",
+      "moveFile": "文件：移动...",
+      "renameFile": "文件：重命名...",
+      "quickOpen": "文件：显示快速打开对话框",
+      "print": "文件：打印当前标签页",
+      "preferences": "MarkText：偏好设置",
+      "closeTab": "文件：关闭当前标签页",
+      "closeWindow": "文件：关闭窗口",
+      "quit": "MarkText：退出",
+      "toggleAutoSave": "文件：切换自动保存",
+      "importFile": "文件：导入...",
+      "exportFile": "文件：导出...",
+      "checkUpdate": "MarkText：检查更新..."
+    },
+    "edit": {
+      "undo": "编辑：撤销",
+      "redo": "编辑：重做",
+      "cut": "编辑：剪切",
+      "copy": "编辑：复制",
+      "paste": "编辑：粘贴",
+      "copyAsMarkdown": "编辑：复制为 Markdown",
+      "copyAsHtml": "编辑：复制为 HTML",
+      "pasteAsPlainText": "编辑：粘贴为纯文本",
+      "selectAll": "编辑：全选",
+      "duplicate": "编辑：复制段落",
+      "createParagraph": "编辑：创建段落",
+      "deleteParagraph": "编辑：删除段落",
+      "find": "编辑：查找",
+      "findNext": "编辑：查找下一个",
+      "findPrevious": "编辑：查找上一个",
+      "replace": "编辑：替换",
+      "findInFolder": "编辑：在文件夹中查找",
+      "screenshot": "编辑：截图"
+    },
+    "paragraph": {
+      "heading1": "段落：转换为一级标题",
+      "heading2": "段落：转换为二级标题",
+      "heading3": "段落：转换为三级标题",
+      "heading4": "段落：转换为四级标题",
+      "heading5": "段落：转换为五级标题",
+      "heading6": "段落：转换为六级标题",
+      "upgradeHeading": "段落：升级标题",
+      "degradeHeading": "段落：降级标题",
+      "table": "段落：创建表格",
+      "codeFence": "段落：转换为代码块",
+      "quoteBlock": "段落：转换为引用块",
+      "mathFormula": "段落：转换为数学公式",
+      "htmlBlock": "段落：转换为 HTML 块",
+      "orderList": "段落：转换为有序列表",
+      "bulletList": "段落：转换为无序列表",
+      "taskList": "段落：转换为任务列表",
+      "looseListItem": "段落：转换为松散列表项",
+      "paragraph": "段落：创建新段落",
+      "horizontalLine": "段落：插入水平线",
+      "frontMatter": "段落：插入 Front Matter",
+      "resetParagraph": "段落：转换为正文"
+    },
+    "format": {
+      "strong": "格式：粗体",
+      "emphasis": "格式：斜体",
+      "underline": "格式：下划线",
+      "superscript": "格式：上标",
+      "subscript": "格式：下标",
+      "highlight": "格式：高亮",
+      "inlineCode": "格式：行内代码",
+      "inlineMath": "格式：行内数学公式",
+      "strike": "格式：删除线",
+      "hyperlink": "格式：超链接",
+      "image": "格式：插入图片",
+      "clearFormat": "格式：清除格式"
+    },
+    "window": {
+      "minimize": "窗口：最小化",
+      "toggleAlwaysOnTop": "窗口：始终置顶",
+      "zoomIn": "窗口：放大",
+      "zoomOut": "窗口：缩小",
+      "toggleFullScreen": "窗口：切换全屏",
+      "zoom": "窗口：缩放...",
+      "changeTheme": "主题：更改主题..."
+    },
+    "view": {
+      "commandPalette": "视图：显示命令面板",
+      "sourceCodeMode": "视图：切换源代码模式",
+      "typewriterMode": "视图：切换打字机模式",
+      "focusMode": "视图：专注模式",
+      "toggleSidebar": "视图：切换侧边栏",
+      "toggleToc": "视图：切换目录",
+      "toggleTabbar": "视图：切换标签栏",
+      "toggleDevTools": "视图：显示开发者工具（调试）",
+      "devReload": "视图：重新加载窗口（调试）",
+      "reloadImages": "视图：强制重新加载图片",
+      "textDirection": "视图：设置文本方向"
+    },
+    "tabs": {
+      "cycleForward": "标签页：向后循环切换",
+      "cycleBackward": "标签页：向前循环切换",
+      "switchToLeft": "标签页：切换到左侧标签",
+      "switchToRight": "标签页：切换到右侧标签",
+      "switchToFirst": "标签页：切换到第 1 个标签",
+      "switchToSecond": "标签页：切换到第 2 个标签",
+      "switchToThird": "标签页：切换到第 3 个标签",
+      "switchToFourth": "标签页：切换到第 4 个标签",
+      "switchToFifth": "标签页：切换到第 5 个标签",
+      "switchToSixth": "标签页：切换到第 6 个标签",
+      "switchToSeventh": "标签页：切换到第 7 个标签",
+      "switchToEighth": "标签页：切换到第 8 个标签",
+      "switchToNinth": "标签页：切换到第 9 个标签",
+      "switchToTenth": "标签页：切换到第 10 个标签"
+    },
+    "docs": {
+      "userGuide": "MarkText：用户指南",
+      "markdownSyntax": "MarkText：Markdown 语法指南"
+    },
+    "spellchecker": {
+      "switchLanguage": "拼写检查：切换语言",
+      "switchLanguagePlaceholder": "选择语言"
+    },
+    "misc": {
+      "changeEncoding": "文件：更改编码",
+      "changeLineEnding": "文件：更改换行符",
+      "trailingNewline": "文件：尾随换行",
+      "selectOption": "选择一个选项",
+      "searchFile": "搜索要打开的文件",
+      "currentSuffix": " - 当前",
+      "trimAllTrailingNewlines": "删除所有尾随换行",
+      "ensureSingleNewline": "确保单个换行",
+      "disabled": "禁用",
+      "crlf": "回车换行 (CRLF)",
+      "lf": "换行 (LF)"
+    },
+    "export": {
+      "html": "HTML",
+      "pdf": "PDF"
+    },
+    "themes": {
+      "cadmiumLight": "镉浅色",
+      "dark": "深色",
+      "graphite": "石墨色",
+      "materialDark": "材料深色",
+      "oneDark": "One Dark",
+      "ulysses": "Ulysses"
+    },
+    "textDirection": {
+      "ltr": "从左到右",
+      "rtl": "从右到左"
+    }
+  }
+}

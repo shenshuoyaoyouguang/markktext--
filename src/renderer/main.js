@@ -3,11 +3,10 @@ import VueElectron from 'vue-electron'
 import sourceMapSupport from 'source-map-support'
 import bootstrapRenderer from './bootstrap'
 import VueRouter from 'vue-router'
-import lang from 'element-ui/lib/locale/lang/en'
-import locale from 'element-ui/lib/locale'
 import axios from './axios'
 import store from './store'
 import './assets/symbolIcon'
+import { initRendererI18n } from '@/i18n/renderer'
 import {
   Dialog,
   Form,
@@ -59,8 +58,6 @@ addElementStyle()
 // Be careful when changing code before this line!
 
 // Configure Vue
-locale.use(lang)
-
 Vue.use(Dialog)
 Vue.use(Form)
 Vue.use(FormItem)
@@ -100,9 +97,23 @@ const router = new VueRouter({
   routes: routes(global.marktext.env.type)
 })
 
-/* eslint-disable no-new */
-new Vue({
-  store,
-  router,
-  template: '<router-view class="view"></router-view>'
-}).$mount('#app')
+// 初始化i18n并创建Vue实例
+const initApp = async () => {
+  // 从store获取用户语言偏好，默认'en-US'
+  const initialLanguage = global.marktext?.initialState?.language || store.state.preferences.language || 'en'
+  const localeMap = {
+    en: 'en-US',
+    'zh-CN': 'zh-CN'
+  }
+
+  await initRendererI18n(Vue, localeMap[initialLanguage] || 'en-US')
+
+  /* eslint-disable no-new */
+  new Vue({
+    store,
+    router,
+    template: '<router-view class="view"></router-view>'
+  }).$mount('#app')
+}
+
+initApp()

@@ -1,5 +1,6 @@
 import { ipcRenderer, shell } from 'electron'
 import notice from '../services/notification'
+import { t } from '../i18n'
 
 const state = {}
 
@@ -10,10 +11,10 @@ const mutations = {}
 const actions = {
   LISTEN_FOR_NOTIFICATION ({ commit }) {
     const DEFAULT_OPTS = {
-      title: 'Infomation',
+      title: t('messages.notifications.information'),
       type: 'primary',
       time: 10000,
-      message: 'You should never see this message'
+      message: t('messages.notifications.defaultMessage')
     }
 
     ipcRenderer.on('mt::show-notification', (e, opts) => {

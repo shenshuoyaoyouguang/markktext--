@@ -3,6 +3,7 @@ import { ipcRenderer } from 'electron'
 import { isChildOfDirectory, hasMarkdownExtension, MARKDOWN_INCLUSIONS } from '../../common/filesystem/paths'
 import bus from '../bus'
 import { delay } from '@/util'
+import { t } from '@/i18n'
 import FileSearcher from '@/node/fileSearcher'
 
 const SPECIAL_CHARS = /[\[\]\\^$.\|\?\*\+\(\)\/]{1}/g // eslint-disable-line no-useless-escape
@@ -11,8 +12,6 @@ const SPECIAL_CHARS = /[\[\]\\^$.\|\?\*\+\(\)\/]{1}/g // eslint-disable-line no-
 class QuickOpenCommand {
   constructor (rootState) {
     this.id = 'file.quick-open'
-    this.description = 'File: Quick Open'
-    this.placeholder = 'Search file to open'
     this.shortcut = null
 
     this.subcommands = []
@@ -24,6 +23,14 @@ class QuickOpenCommand {
 
     this._directorySearcher = new FileSearcher()
     this._cancelFn = null
+  }
+
+  get description () {
+    return t('commands.file.quickOpen')
+  }
+
+  get placeholder () {
+    return t('commands.misc.searchFile')
   }
 
   search = async query => {

@@ -1,21 +1,35 @@
+import Vue from 'vue'
 import bus from '../bus'
 import notice from '@/services/notification'
+import { t } from '@/i18n'
 import { delay } from '@/util'
 import { SpellChecker } from '@/spellchecker'
 import { getLanguageName } from '@/spellchecker/languageMap'
+
+const localeState = Vue.observable({ tick: 0 })
 
 // Command to switch the spellchecker language
 class SpellcheckerLanguageCommand {
   constructor (spellchecker) {
     this.id = 'spellchecker.switch-language'
-    this.description = 'Spelling: Switch language'
-    this.placeholder = 'Select a language to switch to'
     this.shortcut = null
 
     this.spellchecker = spellchecker
 
     this.subcommands = []
     this.subcommandSelectedIndex = -1
+  }
+
+  get description () {
+    return t('commands.spellchecker.switchLanguage')
+  }
+
+  get placeholder () {
+    return t('commands.spellchecker.switchLanguagePlaceholder')
+  }
+
+  touchLocale () {
+    localeState.tick++
   }
 
   run = async () => {
@@ -43,9 +57,9 @@ class SpellcheckerLanguageCommand {
       bus.$emit('switch-spellchecker-language', command.value)
     } else {
       notice.notify({
-        title: 'Spelling',
+        title: t('messages.notifications.spelling'),
         type: 'warning',
-        message: 'Cannot change language because spellchecker is disabled.'
+        message: t('messages.notifications.spellcheckerDisabled')
       })
     }
   }

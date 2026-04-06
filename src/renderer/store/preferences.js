@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron'
 import bus from '../bus'
+import { setLanguage } from '@/i18n/renderer'
 
 // user preference
 const state = {
@@ -105,6 +106,10 @@ const mutations = {
         state[key] = preference[key]
       }
     })
+    // 当语言改变时，更新i18n locale
+    if (preference.language) {
+      setLanguage(preference.language)
+    }
   },
   SET_MODE (state, { type, checked }) {
     state[type] = checked

@@ -49,6 +49,8 @@ class TableBarTools extends BaseFloat {
     const renderArray = toolList[tableInfo.barType]
     const children = renderArray.map((item) => {
       const { label } = item
+      const itemKey = label.charAt(0).toLowerCase() + label.slice(1).replace(/\s(\w)/g, (match, p1) => p1.toUpperCase())
+      const translatedLabel = this.muya.t(`tableTools.${itemKey}`)
 
       const selector = 'li.item'
       return h(selector, {
@@ -60,7 +62,7 @@ class TableBarTools extends BaseFloat {
             this.selectItem(event, item)
           }
         }
-      }, label)
+      }, translatedLabel || label)
     })
 
     const vnode = h('ul', children)

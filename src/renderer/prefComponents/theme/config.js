@@ -1,3 +1,8 @@
+/**
+ * 主题设置选项配置
+ * 使用 i18n 函数动态生成标签文本
+ */
+
 export const themes = [
   {
     name: 'light'
@@ -19,13 +24,15 @@ export const themes = [
   }
 ]
 
-export const autoSwitchThemeOptions = [{
-  label: 'Adjust theme at startup', // Always
-  value: 0
-}, /* {
-  label: 'Only at runtime',
-  value: 1
-}, */ {
-  label: 'Never',
-  value: 2
-}]
+export function getAutoSwitchThemeOptions (t) {
+  return [{
+    label: t('settings.configOptions.autoSwitchTheme.adjustAtStartup'),
+    value: 0
+  }, /* {
+    label: t('settings.configOptions.autoSwitchTheme.onlyAtRuntime'),
+    value: 1
+  }, */ {
+    label: t('settings.configOptions.autoSwitchTheme.never'),
+    value: 2
+  }]
+}

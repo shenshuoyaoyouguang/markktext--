@@ -1,23 +1,17 @@
 import { ipcRenderer } from 'electron'
 import { delay } from '@/util'
+import { t } from '@/i18n'
 import bus from '../bus'
-
-const crlfDescription = 'Carriage return and line feed (CRLF)'
-const lfDescription = 'Line feed (LF)'
 
 class LineEndingCommand {
   constructor (editorState) {
     this.id = 'file.line-ending'
-    this.description = 'File: Change Line Ending'
-    this.placeholder = 'Select an option'
 
     this.subcommands = [{
       id: 'file.line-ending-crlf',
-      description: crlfDescription,
       value: 'crlf'
     }, {
       id: 'file.line-ending-lf',
-      description: lfDescription,
       value: 'lf'
     }]
     this.subcommandSelectedIndex = -1
@@ -26,16 +20,27 @@ class LineEndingCommand {
     this._editorState = editorState
   }
 
+  get description () {
+    return t('commands.misc.changeLineEnding')
+  }
+
+  get placeholder () {
+    return t('commands.misc.selectOption')
+  }
+
   run = async () => {
+    const crlfDescription = t('commands.misc.crlf')
+    const lfDescription = t('commands.misc.lf')
+    const currentSuffix = t('commands.misc.currentSuffix')
     const { lineEnding } = this._editorState.currentFile
     if (lineEnding === 'crlf') {
       this.subcommandSelectedIndex = 0
-      this.subcommands[0].description = `${crlfDescription} - current`
+      this.subcommands[0].description = `${crlfDescription}${currentSuffix}`
       this.subcommands[1].description = lfDescription
     } else {
       this.subcommandSelectedIndex = 1
       this.subcommands[0].description = crlfDescription
-      this.subcommands[1].description = `${lfDescription} - current`
+      this.subcommands[1].description = `${lfDescription}${currentSuffix}`
     }
   }
 

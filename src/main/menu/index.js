@@ -9,6 +9,7 @@ import { updateFormatMenu } from '../menu/actions/format'
 import { updateSelectionMenus } from '../menu/actions/paragraph'
 import { viewLayoutChanged } from '../menu/actions/view'
 import configureMenu, { configSettingMenu } from '../menu/templates'
+import { onLanguageChanged, setLanguage } from '../../i18n/mainProcess'
 
 const RECENTLY_USED_DOCUMENTS_FILE_NAME = 'recently-used-documents.json'
 const MAX_RECENTLY_USED_DOCUMENTS = 12
@@ -33,6 +34,11 @@ class AppMenu {
     this.isOsxOrWindows = isOsx || isWindows
     this.activeWindowId = -1
     this.windowMenus = new Map()
+
+    // 注册语言变更回调
+    onLanguageChanged(() => {
+      this._rebuildAllMenus()
+    })
 
     this._listenForIpcMain()
   }
@@ -415,7 +421,48 @@ class AppMenu {
       if (prefs.autoSave !== undefined) {
         this.updateAutoSaveMenu(prefs.autoSave)
       }
+      if (prefs.language !== undefined) {
+        setLanguage(prefs.language)
+      }
     })
+
+    // 监听语言切换事件，重建所有菜单
+    ipcMain.on('mt::change-locale', (e, locale) => {
+      setLanguage(locale)
+    })
+  }
+
+  /**
+   * 重建所有菜单（用于语言切换）
+   */
+  _rebuildAllMenus () {
+    // 重建所有窗口菜单
+    this.windowMenus.forEach((value, key) => {
+      const { type } = value
+      if (type === MenuType.EDITOR) {
+        const recentUsedDocuments = this.getRecentlyUsedDocuments()
+        const { menu: newMenu } = this._buildEditorMenu(recentUsedDocuments)
+        value.menu = newMenu
+
+        // 如果是当前活动窗口，更新应用菜单
+        if (this.activeWindowId === key) {
+          this._setApplicationMenu(newMenu)
+        }
+      } else if (type === MenuType.SETTINGS) {
+        const { menu: newMenu } = this._buildSettingMenu()
+        value.menu = newMenu
+
+        if (this.activeWindowId === key) {
+          this._setApplicationMenu(newMenu)
+        }
+      }
+    })
+
+    // 更新 macOS Dock 菜单
+    if (isOsx) {
+      const { buildDockMenu } = require('./templates')
+      app.dock.setMenu(buildDockMenu())
+    }
   }
 }
 

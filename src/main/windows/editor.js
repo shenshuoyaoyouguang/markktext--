@@ -10,6 +10,7 @@ import { TITLE_BAR_HEIGHT, editorWinOptions, isLinux, isOsx } from '../config'
 import { showEditorContextMenu } from '../contextMenu/editor'
 import { loadMarkdownFile } from '../filesystem/markdown'
 import { switchLanguage } from '../spellchecker'
+import { t } from '../../i18n/mainProcess'
 
 class EditorWindow extends BaseWindow {
   /**
@@ -136,7 +137,7 @@ class EditorWindow extends BaseWindow {
         return
       }
 
-      const msg = `The renderer process has crashed unexpected or is killed (${reason}).`
+      const msg = t('messages.errors.rendererCrashed', { reason })
       log.error(msg)
 
       if (reason === 'abnormal-exit') {
@@ -145,8 +146,12 @@ class EditorWindow extends BaseWindow {
 
       const { response } = await dialog.showMessageBox(win, {
         type: 'warning',
-        buttons: ['Close', 'Reload', 'Keep It Open'],
-        message: 'MarkText has crashed',
+        buttons: [
+          t('messages.buttons.close'),
+          t('messages.buttons.reload'),
+          t('messages.buttons.keepItOpen')
+        ],
+        message: t('messages.errors.crashTitle'),
         detail: msg
       })
 
@@ -269,7 +274,7 @@ class EditorWindow extends BaseWindow {
         const { message, stack } = err
         log.error(`[ERROR] Cannot open file or directory: ${message}\n\n${stack}`)
         browserWindow.webContents.send('mt::show-notification', {
-          title: 'Cannot open tab',
+          title: t('messages.errors.cannotOpenTab'),
           type: 'error',
           message: err.message
         })

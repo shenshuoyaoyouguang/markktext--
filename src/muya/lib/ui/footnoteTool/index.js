@@ -98,13 +98,13 @@ class LinkTools extends BaseFloat {
       }
     }, ''))
     const iconWrapper = h(iconWrapperSelector, icon)
-    let text = 'Can\'t find footnote with syntax [^abc]:'
+    let text = this.muya.t('footnoteTool.notFound')
     if (hasFootnote) {
       const footnoteBlock = footnotes.get(identifier)
 
       text = getFootnoteText(footnoteBlock)
       if (!text) {
-        text = 'Input the footnote definition...'
+        text = this.muya.t('footnoteTool.placeholder')
       }
     }
     const textNode = h('span.text', text)
@@ -114,7 +114,7 @@ class LinkTools extends BaseFloat {
           this.buttonClick(event, hasFootnote)
         }
       }
-    }, hasFootnote ? 'Go to' : 'Create')
+    }, hasFootnote ? this.muya.t('footnoteTool.goTo') : this.muya.t('footnoteTool.create'))
     const children = [textNode, button]
     if (!hasFootnote) {
       children.unshift(iconWrapper)

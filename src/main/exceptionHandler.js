@@ -10,11 +10,10 @@ import { app, clipboard, crashReporter, dialog, ipcMain } from 'electron'
 import os from 'os'
 import log from 'electron-log'
 import { createAndOpenGitHubIssueUrl } from './utils/createGitHubIssue'
+import { t } from '../i18n/mainProcess'
 
 const EXIT_ON_ERROR = !!process.env.MARKTEXT_EXIT_ON_ERROR
 const SHOW_ERROR_DIALOG = !process.env.MARKTEXT_ERROR_INTERACTION
-const ERROR_MSG_MAIN = 'An unexpected error occurred in the main process'
-const ERROR_MSG_RENDERER = 'An unexpected error occurred in the renderer process'
 
 let logger = s => console.error(s)
 
@@ -55,9 +54,9 @@ const handleError = async (title, error, type) => {
     const { response } = await dialog.showMessageBox({
       type: 'error',
       buttons: [
-        'OK',
-        'Copy Error',
-        'Report...'
+        t('messages.buttons.ok'),
+        t('messages.buttons.copyError'),
+        t('messages.buttons.report')
       ],
       defaultId: 0,
       noLink: true,
@@ -101,12 +100,12 @@ Operating system: ${getOSInformation()}`)
 const setupExceptionHandler = () => {
   // main process error handler
   process.on('uncaughtException', error => {
-    handleError(ERROR_MSG_MAIN, error, 'main')
+    handleError(t('messages.errors.unexpectedErrorMain'), error, 'main')
   })
 
   // renderer process error handler
   ipcMain.on('mt::handle-renderer-error', (e, error) => {
-    handleError(ERROR_MSG_RENDERER, error, 'renderer')
+    handleError(t('messages.errors.unexpectedErrorRenderer'), error, 'renderer')
   })
 
   // start crashReporter to save core dumps to temporary folder

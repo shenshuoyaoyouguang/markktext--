@@ -1,51 +1,64 @@
 import { ENCODING_NAME_MAP } from 'common/encoding'
 
-export const tabSizeOptions = [{
-  label: '1',
-  value: 1
-}, {
-  label: '2',
-  value: 2
-}, {
-  label: '3',
-  value: 3
-}, {
-  label: '4',
-  value: 4
-}]
+/**
+ * 编辑器设置选项配置
+ * 使用 i18n 函数动态生成标签文本
+ */
 
-export const endOfLineOptions = [{
-  label: 'Default',
-  value: 'default'
-}, {
-  label: 'Carriage return and line feed (CRLF)',
-  value: 'crlf'
-}, {
-  label: 'Line feed (LF)',
-  value: 'lf'
-}]
+export function getTabSizeOptions () {
+  return [{
+    label: '1',
+    value: 1
+  }, {
+    label: '2',
+    value: 2
+  }, {
+    label: '3',
+    value: 3
+  }, {
+    label: '4',
+    value: 4
+  }]
+}
 
-export const trimTrailingNewlineOptions = [{
-  label: 'Trim all trailing',
-  value: 0
-}, {
-  label: 'Ensure exactly one trailing',
-  value: 1
-}, {
-  label: 'Preserve style of original document',
-  value: 2
-}, {
-  label: 'Do nothing',
-  value: 3
-}]
+export function getEndOfLineOptions (t) {
+  return [{
+    label: t('settings.configOptions.endOfLine.default'),
+    value: 'default'
+  }, {
+    label: t('settings.configOptions.endOfLine.crlf'),
+    value: 'crlf'
+  }, {
+    label: t('settings.configOptions.endOfLine.lf'),
+    value: 'lf'
+  }]
+}
 
-export const textDirectionOptions = [{
-  label: 'Left to Right',
-  value: 'ltr'
-}, {
-  label: 'Right to Left',
-  value: 'rtl'
-}]
+export function getTrimTrailingNewlineOptions (t) {
+  return [{
+    label: t('settings.configOptions.trimTrailingNewline.trimAll'),
+    value: 0
+  }, {
+    label: t('settings.configOptions.trimTrailingNewline.ensureOne'),
+    value: 1
+  }, {
+    label: t('settings.configOptions.trimTrailingNewline.preserve'),
+    value: 2
+  }, {
+    label: t('settings.configOptions.trimTrailingNewline.doNothing'),
+    value: 3
+  }]
+}
+
+export function getTextDirectionOptions (t) {
+  return [{
+    label: t('settings.configOptions.textDirection.ltr'),
+    value: 'ltr'
+  }, {
+    label: t('settings.configOptions.textDirection.rtl'),
+    value: 'rtl'
+  }]
+}
 
 let defaultEncodingOptions = null
 export const getDefaultEncodingOptions = () => {

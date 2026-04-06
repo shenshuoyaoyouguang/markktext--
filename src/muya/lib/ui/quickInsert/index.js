@@ -42,14 +42,35 @@ class QuickInsert extends BaseScrollFloat {
 
   render () {
     const { scrollElement, activeItem, _renderObj } = this
+    const { t } = this.muya
     let children = Object.keys(_renderObj).filter(key => {
       return _renderObj[key].length !== 0
     })
       .map(key => {
-        const titleVnode = h('div.title', key.toUpperCase())
+        const categoryKey = key.replace(/\s(\w)/g, (match, p1) => p1.toUpperCase())
+        const titleVnode = h('div.title', t(`quickInsert.categories.${categoryKey}`).toUpperCase())
         const items = []
         for (const item of _renderObj[key]) {
-          const { title, subTitle, label, icon, shortCut } = item
+          const { subTitle, label, icon, shortCut } = item
+          const itemKey = label.replace(/-(\w)/g, (match, p1) => p1.toUpperCase())
+            .replace('heading', 'header')
+            .replace('hr', 'horizontalLine')
+            .replace('table', 'tableBlock')
+            .replace('mathblock', 'displayMath')
+            .replace('html', 'htmlBlock')
+            .replace('pre', 'codeBlock')
+            .replace('blockquote', 'quoteBlock')
+            .replace('olOrder', 'orderList')
+            .replace('ulBullet', 'bulletList')
+            .replace('ulTask', 'todoList')
+            .replace('vegaLite', 'vegaChart')
+            .replace('flowchart', 'flowChart')
+            .replace('sequence', 'sequenceDiagram')
+            .replace('plantuml', 'plantumlDiagram')
+
+          const translatedTitle = t(`quickInsert.items.${itemKey}.title`)
+          const translatedSubTitle = t(`quickInsert.items.${itemKey}.subTitle`) || subTitle
+
           const iconVnode = h('div.icon-container', h('i.icon', h(`i.icon-${label.replace(/\s/g, '-')}`, {
             style: {
               background: `url(${icon}) no-repeat`,
@@ -58,8 +79,8 @@ class QuickInsert extends BaseScrollFloat {
           }, '')))
 
           const description = h('div.description', [
-            h('div.big-title', title),
-            h('div.sub-title', subTitle)
+            h('div.big-title', translatedTitle),
+            h('div.sub-title', translatedSubTitle)
           ])
           const shortCutVnode = h('div.short-cut', [
             h('span', shortCut)
@@ -79,7 +100,7 @@ class QuickInsert extends BaseScrollFloat {
       })
 
     if (children.length === 0) {
-      children = h('div.no-result', 'No result')
+      children = h('div.no-result', t('imageSelector.descriptions.noResult'))
     }
     const vnode = h('div', children)
 

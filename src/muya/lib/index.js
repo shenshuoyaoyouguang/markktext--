@@ -11,6 +11,7 @@ import { wordCount } from './utils'
 import ExportMarkdown from './utils/exportMarkdown'
 import ExportHtml from './utils/exportHtml'
 import ToolTip from './ui/tooltip'
+import i18n from './i18n'
 import './assets/styles/index.css'
 
 class Muya {
@@ -28,6 +29,8 @@ class Muya {
     const { markdown } = this.options
     this.markdown = markdown
     this.container = getContainer(container, this.options)
+    this.i18n = i18n
+    this.i18n.init(this.options.locale)
     this.eventCenter = new EventCenter()
     this.tooltip = new ToolTip(this)
     // UI plugins
@@ -316,6 +319,10 @@ class Muya {
 
   off (event, listener) {
     this.eventCenter.unsubscribe(event, listener)
+  }
+
+  t (key, params) {
+    return this.i18n.t(key, params)
   }
 
   once (event, listener) {

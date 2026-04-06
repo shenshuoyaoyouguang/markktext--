@@ -74,14 +74,14 @@ class ImageToolbar extends BaseFloat {
       }
       return h(itemSelector, {
         dataset: {
-          tip: i.tooltip
+          tip: this.muya.t(`imageToolbar.${i.type}`)
         },
         on: {
           click: event => {
             this.selectItem(event, i)
           }
         }
-      }, [h('div.tooltip', i.tooltip), iconWrapper])
+      }, [h('div.tooltip', this.muya.t(`imageToolbar.${i.type}`)), iconWrapper])
     })
 
     const vnode = h('ul', children)

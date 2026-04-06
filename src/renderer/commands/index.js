@@ -5,6 +5,7 @@ import bus from '../bus'
 import { delay, isOsx } from '@/util'
 import { isUpdatable } from './utils'
 import getCommandDescriptionById from './descriptions'
+import { t } from '../i18n/renderer'
 
 export { default as FileEncodingCommand } from './fileEncoding'
 export { default as LineEndingCommand } from './lineEnding'
@@ -32,6 +33,37 @@ export class RootCommand {
 const focusEditorAndExecute = fn => {
   setTimeout(() => bus.$emit('editor-focus'), 10)
   setTimeout(() => fn(), 150)
+}
+
+const defineLocalizedDescription = (item, key) => {
+  Object.defineProperty(item, 'description', {
+    enumerable: true,
+    configurable: true,
+    get () {
+      return t(key)
+    }
+  })
+}
+
+const applyCommandDescriptions = items => {
+  for (const item of items) {
+    if (item.descriptionKey) {
+      defineLocalizedDescription(item, item.descriptionKey)
+      delete item.descriptionKey
+    } else if (item.id && !Object.prototype.hasOwnProperty.call(item, 'description')) {
+      Object.defineProperty(item, 'description', {
+        enumerable: true,
+        configurable: true,
+        get () {
+          return getCommandDescriptionById(item.id)
+        }
+      })
+    }
+
+    if (item.subcommands) {
+      applyCommandDescriptions(item.subcommands)
+    }
+  }
 }
 
 const commands = [
@@ -111,14 +143,14 @@ const commands = [
     id: 'file.export-file',
     subcommands: [{
       id: 'file.export-file-html',
-      description: 'HTML',
+      descriptionKey: 'commands.export.html',
       execute: async () => {
         await delay(50)
         bus.$emit('showExportDialog', 'styledHtml')
       }
     }, {
       id: 'file.export-file-pdf',
-      description: 'PDF',
+      descriptionKey: 'commands.export.pdf',
       execute: async () => {
         await delay(50)
         bus.$emit('showExportDialog', 'pdf')
@@ -529,27 +561,27 @@ const commands = [
     id: 'window.change-theme',
     subcommands: [{
       id: 'window.change-theme-light',
-      description: 'Cadmium Light',
+      descriptionKey: 'commands.themes.cadmiumLight',
       value: 'light'
     }, {
       id: 'window.change-theme-dark',
-      description: 'Dark',
+      descriptionKey: 'commands.themes.dark',
       value: 'dark'
     }, {
       id: 'window.change-theme-graphite',
-      description: 'Graphite',
+      descriptionKey: 'commands.themes.graphite',
       value: 'graphite'
     }, {
       id: 'window.change-theme-material-dark',
-      description: 'Material Dark',
+      descriptionKey: 'commands.themes.materialDark',
       value: 'material-dark'
     }, {
       id: 'window.change-theme-one-dark',
-      description: 'One Dark',
+      descriptionKey: 'commands.themes.oneDark',
       value: 'one-dark'
     }, {
       id: 'window.change-theme-ulysses',
-      description: 'Ulysses',
+      descriptionKey: 'commands.themes.ulysses',
       value: 'ulysses'
     }],
     executeSubcommand: async (_, theme) => {
@@ -595,11 +627,11 @@ const commands = [
     id: 'view.text-direction',
     subcommands: [{
       id: 'view.text-direction-ltr',
-      description: 'Left to Right',
+      descriptionKey: 'commands.textDirection.ltr',
       value: 'ltr'
     }, {
       id: 'view.text-direction-rtl',
-      description: 'Right to Left',
+      descriptionKey: 'commands.textDirection.rtl',
       value: 'rtl'
     }],
     executeSubcommand: async (_, value) => {
@@ -669,12 +701,6 @@ if (isOsx) {
   })
 }
 
-// Complete all command descriptions.
-for (const item of commands) {
-  const { id, description } = item
-  if (id && !description) {
-    item.description = getCommandDescriptionById(id)
-  }
-}
+applyCommandDescriptions(commands)
 
 export default commands

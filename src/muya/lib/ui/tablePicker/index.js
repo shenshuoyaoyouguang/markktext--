@@ -107,7 +107,7 @@ class TablePicker extends BaseFloat {
             this.selectItem()
           }
         }
-      }, 'OK')
+      }, this.muya.t('buttons.ok'))
     ])
 
     const vnode = h('div', [h('div.checker', tableRows), tableFooter])

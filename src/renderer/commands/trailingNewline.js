@@ -1,18 +1,11 @@
 import { ipcRenderer } from 'electron'
 import { delay } from '@/util'
+import { t } from '@/i18n'
 import bus from '../bus'
-
-const descriptions = [
-  'Trim all trailing newlines',
-  'Ensure single newline',
-  'Disabled'
-]
 
 class TrailingNewlineCommand {
   constructor (editorState) {
     this.id = 'file.trailing-newline'
-    this.description = 'File: Trailing Newline'
-    this.placeholder = 'Select an option'
 
     this.subcommands = []
     this.subcommandSelectedIndex = -1
@@ -21,7 +14,21 @@ class TrailingNewlineCommand {
     this._editorState = editorState
   }
 
+  get description () {
+    return t('commands.misc.trailingNewline')
+  }
+
+  get placeholder () {
+    return t('commands.misc.selectOption')
+  }
+
   run = async () => {
+    const descriptions = [
+      t('commands.misc.trimAllTrailingNewlines'),
+      t('commands.misc.ensureSingleNewline'),
+      t('commands.misc.disabled')
+    ]
+    const currentSuffix = t('commands.misc.currentSuffix')
     const { trimTrailingNewline } = this._editorState.currentFile
     let index = trimTrailingNewline
     if (index !== 0 && index !== 1) {
@@ -41,7 +48,7 @@ class TrailingNewlineCommand {
       description: descriptions[2],
       value: 3
     }]
-    this.subcommands[index].description = `${descriptions[index]} - current`
+    this.subcommands[index].description = `${descriptions[index]}${currentSuffix}`
     this.subcommandSelectedIndex = index
   }
 

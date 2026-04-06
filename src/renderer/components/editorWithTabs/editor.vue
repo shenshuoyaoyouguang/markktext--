@@ -34,10 +34,10 @@
       dir='ltr'
     >
       <div slot="title" class="dialog-title">
-        Insert Table
+        {{ $t('dialogs.insertTable.title') }}
       </div>
       <el-form :model="tableChecker" :inline="true">
-        <el-form-item label="Rows">
+        <el-form-item :label="$t('dialogs.insertTable.rows')">
           <el-input-number
             ref="rowInput"
             size="mini"
@@ -47,7 +47,7 @@
             :max="30"
           ></el-input-number>
         </el-form-item>
-        <el-form-item label="Columns">
+        <el-form-item :label="$t('dialogs.insertTable.columns')">
           <el-input-number
             size="mini"
             v-model="tableChecker.columns"
@@ -59,10 +59,10 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogTableVisible = false">
-          Cancel
+          {{ $t('dialogs.insertTable.cancel') }}
         </el-button>
         <el-button type="primary" @click="handleDialogTableConfirm">
-          OK
+          {{ $t('dialogs.insertTable.ok') }}
         </el-button>
       </div>
     </el-dialog>
@@ -97,6 +97,7 @@ import Search from '../search'
 import bus from '@/bus'
 import { DEFAULT_EDITOR_FONT_FAMILY } from '@/config'
 import notice from '@/services/notification'
+import { t } from '@/i18n'
 import Printer from '@/services/printService'
 import { SpellcheckerLanguageCommand } from '@/commands'
 import { SpellChecker } from '@/spellchecker'
@@ -165,6 +166,7 @@ export default {
       spellcheckerEnabled: state => state.preferences.spellcheckerEnabled,
       spellcheckerNoUnderline: state => state.preferences.spellcheckerNoUnderline,
       spellcheckerLanguage: state => state.preferences.spellcheckerLanguage,
+      language: state => state.preferences.language,
 
       currentFile: state => state.editor.currentFile,
       projectTree: state => state.project.projectTree,
@@ -436,6 +438,20 @@ export default {
       }
     },
 
+    language: function (value, oldValue) {
+      if (value !== oldValue && this.editor) {
+        const locale = ({
+          en: 'en-US',
+          'zh-CN': 'zh-CN'
+        })[value] || 'en-US'
+        this.editor.i18n.setLocale(locale)
+        if (this.switchLanguageCommand) {
+          this.switchLanguageCommand.touchLocale()
+        }
+        bus.$emit('cmd::sort-commands')
+      }
+    },
+
     currentFile: function (value, oldValue) {
       if (value && value !== oldValue) {
         this.scrollToCursor(0)
@@ -534,7 +550,11 @@ export default {
         imageAction: this.imageAction.bind(this),
         imagePathPicker: this.imagePathPicker.bind(this),
         clipboardFilePath: guessClipboardFilePath,
-        imagePathAutoComplete: this.imagePathAutoComplete.bind(this)
+        imagePathAutoComplete: this.imagePathAutoComplete.bind(this),
+        locale: ({
+          en: 'en-US',
+          'zh-CN': 'zh-CN'
+        })[this.$store.state.preferences.language] || 'en-US'
       }
 
       if (/dark/i.test(theme)) {
@@ -729,7 +749,7 @@ export default {
             destImagePath = await uploadImage(pathname, image, preferences)
           } catch (err) {
             notice.notify({
-              title: 'Upload Image',
+              title: t('messages.notifications.uploadImage'),
               type: 'warning',
               message: err
             })
@@ -799,9 +819,9 @@ export default {
           if (!langCode) {
             // Unable to switch language due to missing dictionary. The spell checker is now in an invalid state.
             notice.notify({
-              title: 'Spelling',
+              title: t('messages.notifications.spelling'),
               type: 'warning',
-              message: `Unable to switch to language "${languageCode}". Requested language dictionary is missing.`
+              message: t('messages.notifications.switchLanguageFailed', { language: languageCode })
             })
           }
         })
@@ -810,9 +830,9 @@ export default {
           log.error(error)
 
           notice.notify({
-            title: 'Spelling',
+            title: t('messages.notifications.spelling'),
             type: 'error',
-            message: `Error while switching to "${languageCode}": ${error.message}`
+            message: t('messages.notifications.switchLanguageError', { language: languageCode, error: error.message })
           })
         })
     },
@@ -945,18 +965,20 @@ export default {
         case 'styledHtml': {
           try {
             const content = await this.editor.exportStyledHTML({
-              title: htmlTitle || '',
-              printOptimization: false,
+              title: htmlTitle,
               extraCss,
-              toc: htmlToc
+              toc: htmlToc,
+              header,
+              footer,
+              headerFooterStyled
             })
             this.$store.dispatch('EXPORT', { type, content })
           } catch (err) {
             log.error('Failed to export document:', err)
             notice.notify({
-              title: `Printing/Exporting ${htmlTitle || 'html'} failed`,
+              title: t('messages.notifications.exportFailed', { type: htmlTitle || 'html' }),
               type: 'error',
-              message: err.message || 'There is something wrong when exporting.'
+              message: err.message || t('messages.notifications.exportErrorMessage')
             })
           }
           break
@@ -983,9 +1005,9 @@ export default {
           } catch (err) {
             log.error('Failed to export document:', err)
             notice.notify({
-              title: 'Printing/Exporting failed',
+              title: t('messages.notifications.exportFailed', { type: htmlTitle || 'PDF' }),
               type: 'error',
-              message: `There is something wrong when export ${htmlTitle || 'PDF'}.`
+              message: t('messages.notifications.exportErrorMessage')
             })
             this.handlePrintServiceClearup()
           }
@@ -1008,9 +1030,9 @@ export default {
           } catch (err) {
             log.error('Failed to export document:', err)
             notice.notify({
-              title: 'Printing/Exporting failed',
+              title: t('messages.notifications.exportFailed', { type: htmlTitle || 'PDF' }),
               type: 'error',
-              message: `There is something wrong when print ${htmlTitle || ''}.`
+              message: t('messages.notifications.exportErrorMessage')
             })
             this.handlePrintServiceClearup()
           }

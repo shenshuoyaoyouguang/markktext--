@@ -1,0 +1,292 @@
+{
+  "settings": {
+    "sidebar": {
+      "title": "Preferences",
+      "searchPlaceholder": "Search preferences",
+      "categories": {
+        "general": "General",
+        "editor": "Editor",
+        "markdown": "Markdown",
+        "spelling": "Spelling",
+        "theme": "Theme",
+        "image": "Image",
+        "keybindings": "Key Bindings"
+      }
+    },
+    "general": {
+      "title": "General",
+      "autoSave": {
+        "title": "Auto Save",
+        "description": "Automatically save document changes",
+        "delayDescription": "Delay following document edit before automatically saving"
+      },
+      "window": {
+        "title": "Window",
+        "titleBarStyle": "Title bar style",
+        "requiresRestart": "Requires restart",
+        "hideScrollbars": "Hide scrollbars",
+        "openFilesInNewWindow": "Open files in new window",
+        "openFoldersInNewWindow": "Open folders in new window",
+        "zoom": "Zoom"
+      },
+      "sidebar": {
+        "title": "Sidebar",
+        "wrapTextInToc": "Wrap text in table of contents",
+        "sortField": "Sort field for files in open folders"
+      },
+      "startup": {
+        "title": "Action on startup",
+        "restoreSession": "Restore last editor session",
+        "openDefaultDir": "Open the default directory",
+        "selectFolder": "Select Folder",
+        "openBlank": "Open a blank page"
+      },
+      "misc": {
+        "title": "Misc",
+        "language": "User interface language"
+      }
+    },
+    "editor": {
+      "title": "Editor",
+      "textEditor": {
+        "title": "Text editor settings",
+        "fontSize": "Font size",
+        "lineHeight": "Line height",
+        "fontFamily": "Font family",
+        "lineWidth": "Maximum width of text editor",
+        "lineWidthNotes": "Leave empty for theme default, otherwise use number with unit suffix, which is one of 'ch' for characters, 'px' for pixels, or '%' for percentage"
+      },
+      "codeBlock": {
+        "title": "Code block settings",
+        "fontSize": "Font size",
+        "fontFamily": "Font family",
+        "showLineNumbers": "Show line numbers",
+        "trimEmptyLines": "Remove leading and trailing empty lines"
+      },
+      "writing": {
+        "title": "Writing behavior",
+        "autoPairBracket": "Automatically close brackets when writing",
+        "autoPairMarkdown": "Automatically complete markdown syntax",
+        "autoPairQuote": "Automatically close quotation marks"
+      },
+      "fileRepresentation": {
+        "title": "File representation",
+        "tabWidth": "Preferred tab width",
+        "lineSeparator": "Line separator type",
+        "defaultEncoding": "Default encoding",
+        "autoGuessEncoding": "Automatically detect file encoding",
+        "trailingNewline": "Handling of trailing newline characters"
+      },
+      "misc": {
+        "title": "Misc",
+        "textDirection": "Text direction",
+        "hideQuickInsertHint": "Hide hint for selecting type of new paragraph",
+        "hideLinkPopup": "Hide popup when cursor is over link",
+        "autoCheck": "Whether to automatically check any related tasks"
+      }
+    },
+    "spellchecker": {
+      "title": "Spelling",
+      "enableSpellchecking": "Enable spell checking",
+      "hideMarks": "Hide marks for spelling errors",
+      "autoDetectLanguage": "Automatically detect document language",
+      "defaultLanguage": "Default language for spell checking",
+      "autoDetectNote": "The used language will be detected automatically while typing. Additional languages may be added through \"Language & Region\" in your system preferences pane.",
+      "customDictionary": {
+        "title": "Custom dictionary",
+        "description": "Edit words in custom dictionary",
+        "emptyText": "No words available",
+        "word": "Word",
+        "options": "Options",
+        "delete": "Delete"
+      },
+      "errors": {
+        "failedToSwitchLanguage": "Failed to switch language",
+        "failedToRemoveWord": "Failed to remove custom word",
+        "unexpectedError": "An unexpected error occurred while saving"
+      }
+    },
+    "markdown": {
+      "title": "Markdown",
+      "lists": {
+        "title": "Lists",
+        "preferLooseList": "Prefer loose list items",
+        "bulletMarker": "Preferred marker for bullet lists",
+        "orderListDelimiter": "Preferred marker for ordered lists",
+        "listIndentation": "Preferred list indentation"
+      },
+      "extensions": {
+        "title": "Markdown extensions",
+        "frontmatter": "Front matter format",
+        "superSubScript": "Enable Pandoc-style superscript and subscript",
+        "footnote": "Enable Pandoc-style footnotes"
+      },
+      "compatibility": {
+        "title": "Compatibility",
+        "htmlRendering": "Enable HTML rendering",
+        "gitlabCompatibility": "Enable GitLab compatibility mode"
+      },
+      "diagrams": {
+        "title": "Diagrams",
+        "sequenceTheme": "Sequence diagram theme"
+      },
+      "misc": {
+        "title": "Misc",
+        "headingStyle": "Preferred heading style"
+      }
+    },
+    "theme": {
+      "title": "Theme",
+      "autoSwitchDescription": "Automatically adjust application theme according to system settings",
+      "openFolder": "Open the themes folder",
+      "openFolderButton": "Open Folder",
+      "importTheme": "Import custom themes",
+      "importThemeButton": "Import Theme"
+    },
+    "image": {
+      "title": "Image",
+      "defaultAction": "Default action after an image is inserted from local folder or clipboard",
+      "clipboardNote": "Clipboard handling is only fully supported on macOS and Windows",
+      "folder": {
+        "title": "Global or relative image folder",
+        "globalFolder": "Global image folder",
+        "open": "Open...",
+        "showInFolder": "Show in Folder",
+        "preferRelative": "Prefer relative assets folder",
+        "relativeName": "Relative image folder name",
+        "filenameNote": "Include ${filename} in the text-box above to automatically insert the document file name"
+      },
+      "uploader": {
+        "title": "Uploader",
+        "currentUploader": "The current image uploader is",
+        "noUploaderSelected": "Currently no uploader is selected. Please select an uploader and config it.",
+        "picgoNotInstalled": "Your system does not have",
+        "installBeforeUse": "installed, please install it before use",
+        "githubWillBeRemoved": "Github will be removed in a future version, please use picgo",
+        "githubToken": "GitHub token",
+        "githubTokenNote": "The token is saved by Keychain on macOS, Secret Service API/libsecret on Linux and Credential Vault on Windows",
+        "inputToken": "Input token",
+        "ownerName": "Owner name",
+        "owner": "owner",
+        "repoName": "Repo name",
+        "repo": "repo",
+        "branchName": "Branch name",
+        "branch": "branch",
+        "optional": "optional",
+        "save": "Save",
+        "scriptDescription": "The script will be executed with the image file path as its only argument and it should output any valid value for the src attribute of a HTMLImageElement",
+        "scriptLocation": "Shell script location",
+        "scriptPath": "Script absolute path",
+        "saveConfig": "Save Config",
+        "githubSaved": "The Github configration has been saved",
+        "scriptSaved": "The command line script configuration has been saved",
+        "legalNotices": {
+          "prefix": "By using",
+          "middle": ", you agree to",
+          "privacy": "Privacy Statement",
+          "and": "and",
+          "terms": "Terms of Service",
+          "gdpr": "This service cannot be used in Europe due to GDPR issues"
+        }
+      }
+    },
+    "keybindings": {
+      "title": "Key Bindings",
+      "description": "Customize MarkText shortcuts and click on the save button below to apply all changes (requires a restart). All available and default key binding can be found",
+      "online": "online",
+      "keyCombination": "Key Combination",
+      "options": "Options",
+      "edit": "Edit",
+      "reset": "Reset",
+      "unbind": "Unbind",
+      "save": "Save",
+      "restoreDefaults": "Restore default key bindings",
+      "debugOptions": "Debug options",
+      "dumpKeyboard": "Dump keyboard information",
+      "keyInputDialog": {
+        "placeholder": "Press a key combination",
+        "pressEnter": "Press Enter to continue or ESC to exit",
+        "invalidCombination": "Current key combination cannot be bound!"
+      },
+      "errors": {
+        "failedToSave": "Failed to save",
+        "unexpectedError": "An unexpected error occurred while saving",
+        "shortcutInUse": "Shortcut already in use",
+        "shortcutInUseMessage": "The shortcut \"{{accelerator}}\" is already in use. Please unset the shortcut and try again."
+      }
+    },
+    "common": {
+      "selectFont": "Select font..."
+    },
+    "configOptions": {
+      "titleBarStyle": {
+        "custom": "Custom",
+        "native": "Native"
+      },
+      "zoom": {
+        "percent": "{{value}}%"
+      },
+      "fileSortBy": {
+        "created": "Creation time",
+        "modified": "Modification time",
+        "title": "Title"
+      },
+      "language": {
+        "english": "English",
+        "chinese": "简体中文"
+      },
+      "endOfLine": {
+        "default": "Default",
+        "crlf": "Carriage return and line feed (CRLF)",
+        "lf": "Line feed (LF)"
+      },
+      "trimTrailingNewline": {
+        "trimAll": "Trim all trailing",
+        "ensureOne": "Ensure exactly one trailing",
+        "preserve": "Preserve style of original document",
+        "doNothing": "Do nothing"
+      },
+      "textDirection": {
+        "ltr": "Left to Right",
+        "rtl": "Right to Left"
+      },
+      "headingStyle": {
+        "atx": "ATX heading",
+        "setext": "Setext heading"
+      },
+      "listIndentation": {
+        "docfx": "DocFX style",
+        "trueTab": "True tab character",
+        "singleSpace": "Single space character",
+        "twoSpaces": "Two space characters",
+        "threeSpaces": "Three space characters",
+        "fourSpaces": "Four space characters"
+      },
+      "frontmatter": {
+        "yaml": "YAML",
+        "toml": "TOML",
+        "jsonSemicolon": "JSON (;;)",
+        "jsonBrace": "JSON ({})"
+      },
+      "sequenceTheme": {
+        "hand": "Hand drawn",
+        "simple": "Simple"
+      },
+      "autoSwitchTheme": {
+        "adjustAtStartup": "Adjust theme at startup",
+        "never": "Never"
+      },
+      "imageActions": {
+        "upload": "Upload image to cloud using selected uploader (must be configured below)",
+        "folder": "Copy image to designated relative assets or global local folder",
+        "path": "Keep original location"
+      },
+      "uploaderServices": {
+        "none": "None",
+        "picgo": "Picgo",
+        "github": "GitHub",
+        "cliScript": "Command line script"
+      }
+    }
+  }
+}

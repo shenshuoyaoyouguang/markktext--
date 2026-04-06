@@ -2,19 +2,20 @@ import { app } from 'electron'
 import * as actions from '../actions/file'
 import { userSetting } from '../actions/marktext'
 import { isOsx } from '../../config'
+import { t } from '../../../i18n/mainProcess'
 
 export default function (keybindings, userPreference, recentlyUsedFiles) {
   const { autoSave } = userPreference.getAll()
   const fileMenu = {
-    label: '&File',
+    label: t('menu.file.title'),
     submenu: [{
-      label: 'New Tab',
+      label: t('menu.file.newTab'),
       accelerator: keybindings.getAccelerator('file.new-tab'),
       click (menuItem, browserWindow) {
         actions.newBlankTab(browserWindow)
       }
     }, {
-      label: 'New Window',
+      label: t('menu.file.newWindow'),
       accelerator: keybindings.getAccelerator('file.new-window'),
       click (menuItem, browserWindow) {
         actions.newEditorWindow()
@@ -22,13 +23,13 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
     }, {
       type: 'separator'
     }, {
-      label: 'Open File...',
+      label: t('menu.file.openFile'),
       accelerator: keybindings.getAccelerator('file.open-file'),
       click (menuItem, browserWindow) {
         actions.openFile(browserWindow)
       }
     }, {
-      label: 'Open Folder...',
+      label: t('menu.file.openFolder'),
       accelerator: keybindings.getAccelerator('file.open-folder'),
       click (menuItem, browserWindow) {
         actions.openFolder(browserWindow)
@@ -38,7 +39,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
 
   if (!isOsx) {
     const recentlyUsedMenu = {
-      label: 'Open Recent',
+      label: t('menu.file.openRecent'),
       submenu: []
     }
 
@@ -55,7 +56,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
       type: 'separator',
       visible: recentlyUsedFiles.length > 0
     }, {
-      label: 'Clear Recently Used',
+      label: t('menu.file.clearRecentlyUsed'),
       enabled: recentlyUsedFiles.length > 0,
       click (menuItem, browserWindow) {
         actions.clearRecentlyUsed()
@@ -76,19 +77,19 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   fileMenu.submenu.push({
     type: 'separator'
   }, {
-    label: 'Save',
+    label: t('menu.file.save'),
     accelerator: keybindings.getAccelerator('file.save'),
     click (menuItem, browserWindow) {
       actions.save(browserWindow)
     }
   }, {
-    label: 'Save As...',
+    label: t('menu.file.saveAs'),
     accelerator: keybindings.getAccelerator('file.save-as'),
     click (menuItem, browserWindow) {
       actions.saveAs(browserWindow)
     }
   }, {
-    label: 'Auto Save',
+    label: t('menu.file.autoSave'),
     type: 'checkbox',
     checked: autoSave,
     id: 'autoSaveMenuItem',
@@ -98,13 +99,13 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Move To...',
+    label: t('menu.file.moveTo'),
     accelerator: keybindings.getAccelerator('file.move-file'),
     click (menuItem, browserWindow) {
       actions.moveTo(browserWindow)
     }
   }, {
-    label: 'Rename...',
+    label: t('menu.file.rename'),
     accelerator: keybindings.getAccelerator('file.rename-file'),
     click (menuItem, browserWindow) {
       actions.rename(browserWindow)
@@ -112,27 +113,27 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Import...',
+    label: t('menu.file.import'),
     click (menuItem, browserWindow) {
       actions.importFile(browserWindow)
     }
   }, {
-    label: 'Export',
+    label: t('menu.file.export'),
     submenu: [
       {
-        label: 'HTML',
+        label: t('menu.file.exportHtml'),
         click (menuItem, browserWindow) {
           actions.exportFile(browserWindow, 'styledHtml')
         }
       }, {
-        label: 'PDF',
+        label: t('menu.file.exportPdf'),
         click (menuItem, browserWindow) {
           actions.exportFile(browserWindow, 'pdf')
         }
       }
     ]
   }, {
-    label: 'Print',
+    label: t('menu.file.print'),
     accelerator: keybindings.getAccelerator('file.print'),
     click (menuItem, browserWindow) {
       actions.printDocument(browserWindow)
@@ -141,7 +142,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
     type: 'separator',
     visible: !isOsx
   }, {
-    label: 'Preferences...',
+    label: t('menu.file.preferences'),
     accelerator: keybindings.getAccelerator('file.preferences'),
     visible: !isOsx,
     click () {
@@ -150,13 +151,13 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Close Tab',
+    label: t('menu.file.closeTab'),
     accelerator: keybindings.getAccelerator('file.close-tab'),
     click (menuItem, browserWindow) {
       actions.closeTab(browserWindow)
     }
   }, {
-    label: 'Close Window',
+    label: t('menu.file.closeWindow'),
     accelerator: keybindings.getAccelerator('file.close-window'),
     click (menuItem, browserWindow) {
       actions.closeWindow(browserWindow)
@@ -165,7 +166,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
     type: 'separator',
     visible: !isOsx
   }, {
-    label: 'Quit',
+    label: t('menu.file.quit'),
     accelerator: keybindings.getAccelerator('file.quit'),
     visible: !isOsx,
     click: app.quit

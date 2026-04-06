@@ -8,8 +8,7 @@
       width="450px"
     >
       <div class="body">
-        <div
-          class="drop-container"
+        <div class="drop-container"
           :class="{active: isOver}"
           @dragover="dragOverHandler"
           @dragleave="dragLeaveHandler"
@@ -18,8 +17,8 @@
           <div class="img-wrapper">
             <img :src="`${importIcon.url}`" alt="import file">
           </div>
-          <div>Import or Open</div>
-          <p> Drop here to get you stuff into MarkText</p>
+          <div>{{ $t('dialogs.import.title') }}</div>
+          <p>{{ $t('dialogs.import.desc') }}</p>
         </div>
         <div class="file-list">
           <div>.md</div>

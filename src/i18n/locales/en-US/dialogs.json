@@ -1,0 +1,142 @@
+{
+  "dialogs": {
+    "about": {
+      "title": "About MarkText",
+      "version": "Version",
+      "description": "Next generation Markdown editor",
+      "close": "Close"
+    },
+    "preferences": {
+      "title": "Preferences",
+      "save": "Save",
+      "cancel": "Cancel",
+      "reset": "Reset to Default"
+    },
+    "commandPalette": {
+      "title": "Command Palette",
+      "placeholder": "Type a command to execute",
+      "noResults": "No commands found"
+    },
+    "insertTable": {
+      "title": "Insert Table",
+      "rows": "Rows",
+      "columns": "Columns",
+      "cancel": "Cancel",
+      "ok": "OK"
+    },
+    "search": {
+      "searchPlaceholder": "Search",
+      "replacePlaceholder": "Replacement",
+      "caseSensitive": "Case Sensitive",
+      "wholeWord": "Select whole word",
+      "useRegex": "Use query as RegEx",
+      "replaceAll": "Replace All",
+      "replaceSingle": "Replace Single",
+      "invalidRegex": "Invalid regular expression: /{{value}}/.",
+      "regexMatchEmpty": "RegExp: /{{value}}/ match empty string."
+    },
+    "sidebarSearch": {
+      "placeholder": "Search in folder...",
+      "noFolderOpen": "No folder open",
+      "noResultsFound": "No results found.",
+      "cancel": "Cancel",
+      "openFolder": "Open Folder",
+      "searchLimited": "Search was limited to 100 files.",
+      "resultInfo": "{{matchCount}} matches in {{fileCount}} files"
+    },
+    "export": {
+      "title": "Export Options",
+      "tabs": {
+        "info": "Info",
+        "infoDesc": "Please customize the page appearance and click on \"export\" to continue.",
+        "page": "Page",
+        "style": "Style",
+        "theme": "Theme",
+        "headerFooter": "Header & Footer",
+        "toc": "Table of Contents"
+      },
+      "page": {
+        "htmlTitle": "The page title:",
+        "pageSize": "Page size:",
+        "customSize": "Width/Height in mm:",
+        "landscape": "Landscape orientation:",
+        "margin": "Page margin in mm:",
+        "marginTopBottom": "Top/Bottom:",
+        "marginLeftRight": "Left/Right:"
+      },
+      "style": {
+        "overwriteFont": "Overwrite theme font settings:",
+        "fontFamily": "Font family:",
+        "fontSize": "Font size",
+        "lineHeight": "Line height",
+        "autoNumbering": "Auto numbering headings:",
+        "showFrontMatter": "Show front matter:"
+      },
+      "theme": {
+        "desc": "You can change the document appearance by choosing a theme or create a handcrafted one.",
+        "themeLabel": "Theme:"
+      },
+      "headerFooter": {
+        "desc": "The text appear on all pages if header and/or footer is defined.",
+        "headerType": "Header type:",
+        "headerLeft": "The left header text:",
+        "headerCenter": "The main header text:",
+        "headerRight": "The right header text:",
+        "footerType": "Footer type:",
+        "footerLeft": "The left footer text:",
+        "footerCenter": "The main footer text:",
+        "footerRight": "The right footer text:",
+        "customizeStyle": "Customize style:",
+        "allowStyled": "Allow styled header and footer:",
+        "fontSize": "Header and footer font size"
+      },
+      "toc": {
+        "includeTopHeading": "Include top heading:",
+        "includeTopHeadingDesc": "Includes the first heading level too.",
+        "title": "Title:"
+      },
+      "exportButton": "Export..."
+    },
+    "import": {
+      "title": "Import or Open",
+      "desc": "Drop here to get you stuff into MarkText",
+      "supportedFormats": "Supported formats"
+    },
+    "tweet": {
+      "title": "Send us feedback via tweet",
+      "feeling": "What's your experience feelings?",
+      "feedback": "Tell us your feedback?",
+      "reportGithub": "Report bug or feature request via github",
+      "tweet": "Tweet"
+    },
+    "tree": {
+      "openedFiles": "Opened files",
+      "saveAll": "Save All",
+      "closeAll": "Close All",
+      "emptyProject": "Empty project",
+      "createFile": "Create File",
+      "openFolder": "Open Folder"
+    },
+    "toc": {
+      "title": "Table Of Contents"
+    },
+    "recent": {
+      "newFile": "New File"
+    },
+    "titleBar": {
+      "words": "Words",
+      "characters": "Characters",
+      "paragraphs": "Paragraphs"
+    },
+    "notifications": {
+      "uploadImage": "Upload Image",
+      "spelling": "Spelling",
+      "unableSwitchLang": "Unable to switch to language \"{{lang}}\". Requested language dictionary is missing.",
+      "errorSwitchingLang": "Error while switching to \"{{lang}}\": {{error}}",
+      "exportFailed": "Printing/Exporting failed",
+      "exportErrorMsg": "There is something wrong when exporting.",
+      "exportPdfMsg": "There is something wrong when export {{name}}.",
+      "exportPrintMsg": "There is something wrong when print {{name}}."
+    }
+  }
+}

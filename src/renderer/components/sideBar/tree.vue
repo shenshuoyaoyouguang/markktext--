@@ -4,19 +4,19 @@
       <!-- Placeholder -->
     </div>
 
-    <!-- Opened tabs -->
+    <!-- Opened files -->
     <div class="opened-files">
       <div class="title">
         <svg class="icon icon-arrow" :class="{'fold': !showOpenedFiles}" aria-hidden="true" @click.stop="toggleOpenedFiles()">
           <use xlink:href="#icon-arrow"></use>
         </svg>
-        <span class="default-cursor text-overflow" @click.stop="toggleOpenedFiles()">Opened files</span>
-        <a href="javascript:;" @click.stop="saveAll(false)" title="Save All">
+        <span class="default-cursor text-overflow" @click.stop="toggleOpenedFiles()">{{ $t('dialogs.tree.openedFiles') }}</span>
+        <a href="javascript:;" @click.stop="saveAll(false)" :title="$t('dialogs.tree.saveAll')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-save-all"></use>
           </svg>
         </a>
-        <a href="javascript:;" @click.stop="saveAll(true)" title="Close All">
+        <a href="javascript:;" @click.stop="saveAll(true)" :title="$t('dialogs.tree.closeAll')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-close-all"></use>
           </svg>
@@ -62,8 +62,8 @@
           :depth="depth"
         ></file>
         <div class="empty-project" v-if="projectTree.files.length === 0 && projectTree.folders.length === 0">
-          <span>Empty project</span>
-          <a href="javascript:;" @click.stop="createFile">Create File</a>
+          <span>{{ $t('dialogs.tree.emptyProject') }}</span>
+          <a href="javascript:;" @click.stop="createFile">{{ $t('dialogs.tree.createFile') }}</a>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
           <use :xlink:href="FolderIcon.url"></use>
         </svg>
         <button class="button-primary" @click="openFolder">
-          Open Folder
+          {{ $t('dialogs.tree.openFolder') }}
         </button>
       </div>
     </div>

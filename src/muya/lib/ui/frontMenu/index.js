@@ -61,10 +61,28 @@ class FrontMenu extends BaseFloat {
 
   renderSubMenu (subMenu) {
     const { reference } = this
+    const { t } = this.muya
     const rect = reference.getBoundingClientRect()
     const windowHeight = document.documentElement.clientHeight
     const children = subMenu.map(menuItem => {
-      const { icon, title, label, shortCut } = menuItem
+      const { icon, label, shortCut } = menuItem
+      const itemKey = label.replace(/-(\w)/g, (match, p1) => p1.toUpperCase())
+        .replace('heading', 'header')
+        .replace('hr', 'horizontalLine')
+        .replace('table', 'tableBlock')
+        .replace('mathblock', 'displayMath')
+        .replace('html', 'htmlBlock')
+        .replace('pre', 'codeBlock')
+        .replace('blockquote', 'quoteBlock')
+        .replace('olOrder', 'orderList')
+        .replace('ulBullet', 'bulletList')
+        .replace('ulTask', 'todoList')
+        .replace('vegaLite', 'vegaChart')
+        .replace('flowchart', 'flowChart')
+        .replace('sequence', 'sequenceDiagram')
+        .replace('plantuml', 'plantumlDiagram')
+
+      const translatedTitle = t(`quickInsert.items.${itemKey}.title`)
       const iconWrapperSelector = 'div.icon-wrapper'
       const iconWrapper = h(iconWrapperSelector, h('i.icon', h(`i.icon-${label.replace(/\s/g, '-')}`, {
         style: {
@@ -73,7 +91,7 @@ class FrontMenu extends BaseFloat {
         }
       }, '')))
 
-      const textWrapper = h('span', title)
+      const textWrapper = h('span', translatedTitle)
       const shortCutWrapper = h('div.short-cut', [
         h('span', shortCut)
       ])
@@ -98,8 +116,9 @@ class FrontMenu extends BaseFloat {
 
   render () {
     const { oldVnode, frontMenuContainer, outmostBlock, startBlock, endBlock } = this
+    const { t } = this.muya
     const { type, functionType } = outmostBlock
-    const children = menu.map(({ icon, label, text, shortCut }) => {
+    const children = menu.map(({ icon, label, shortCut }) => {
       const subMenu = getSubMenu(outmostBlock, startBlock, endBlock)
       const iconWrapperSelector = 'div.icon-wrapper'
       const iconWrapper = h(iconWrapperSelector, h('i.icon', h(`i.icon-${label.replace(/\s/g, '-')}`, {
@@ -108,7 +127,7 @@ class FrontMenu extends BaseFloat {
           'background-size': '100%'
         }
       }, '')))
-      const textWrapper = h('span', text)
+      const textWrapper = h('span', t(`frontMenu.${label === 'new' ? 'newParagraph' : label}`))
       const shortCutWrapper = h('div.short-cut', [
         h('span', shortCut)
       ])

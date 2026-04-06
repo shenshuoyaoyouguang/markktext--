@@ -1,0 +1,160 @@
+{
+  "commands": {
+    "mt": {
+      "hide": "MarkText: Hide MarkText",
+      "hideOthers": "MarkText: Hide Others"
+    },
+    "file": {
+      "newWindow": "File: New Window",
+      "newTab": "File: New Tab",
+      "openFile": "File: Open file",
+      "openFolder": "File: Open Folder",
+      "save": "File: Save",
+      "saveAs": "File: Save As...",
+      "moveFile": "File: Move...",
+      "renameFile": "File: Rename...",
+      "quickOpen": "File: Show quick open dialog",
+      "print": "File: Print current Tab",
+      "preferences": "MarkText: Preferences",
+      "closeTab": "File: Close current Tab",
+      "closeWindow": "File: Close Window",
+      "quit": "MarkText: Quit",
+      "toggleAutoSave": "File: Toggle Auto Save",
+      "importFile": "File: Import...",
+      "exportFile": "File: Export...",
+      "checkUpdate": "MarkText: Check for Updates..."
+    },
+    "edit": {
+      "undo": "Edit: Undo",
+      "redo": "Edit: Redo",
+      "cut": "Edit: Cut",
+      "copy": "Edit: Copy",
+      "paste": "Edit: Paste",
+      "copyAsMarkdown": "Edit: Copy as Markdown",
+      "copyAsHtml": "Edit: Copy as HTML",
+      "pasteAsPlainText": "Edit: Paste as Plain Text",
+      "selectAll": "Edit: Select All",
+      "duplicate": "Edit: Duplicate",
+      "createParagraph": "Edit: Create Paragraph",
+      "deleteParagraph": "Edit: Delete Paragraph",
+      "find": "Edit: Find",
+      "findNext": "Edit: Find Next",
+      "findPrevious": "Edit: Find Previous",
+      "replace": "Edit: Replace",
+      "findInFolder": "Edit: Find in Folder",
+      "screenshot": "Edit: Make Screenshot"
+    },
+    "paragraph": {
+      "heading1": "Paragraph: Transform into Heading 1",
+      "heading2": "Paragraph: Transform into Heading 2",
+      "heading3": "Paragraph: Transform into Heading 3",
+      "heading4": "Paragraph: Transform into Heading 4",
+      "heading5": "Paragraph: Transform into Heading 5",
+      "heading6": "Paragraph: Transform into Heading 6",
+      "upgradeHeading": "Paragraph: Upgrade Heading",
+      "degradeHeading": "Paragraph: Degrade Heading",
+      "table": "Paragraph: Create Table",
+      "codeFence": "Paragraph: Transform into Code Fence",
+      "quoteBlock": "Paragraph: Transform into Quote Block",
+      "mathFormula": "Paragraph: Transform into Math Formula",
+      "htmlBlock": "Paragraph: Transform into HTML Block",
+      "orderList": "Paragraph: Transform into Order List",
+      "bulletList": "Paragraph: Transform into Bullet List",
+      "taskList": "Paragraph: Transform into Task List",
+      "looseListItem": "Paragraph: Convert to Loose List Item",
+      "paragraph": "Paragraph: Create new Paragraph",
+      "horizontalLine": "Paragraph: Insert Horizontal Line",
+      "frontMatter": "Paragraph: Insert Front Matter",
+      "resetParagraph": "Paragraph: Transform into Paragraph"
+    },
+    "format": {
+      "strong": "Format: Strong",
+      "emphasis": "Format: Emphasis",
+      "underline": "Format: Underline",
+      "superscript": "Format: Superscript",
+      "subscript": "Format: Subscript",
+      "highlight": "Format: Highlight",
+      "inlineCode": "Format: Inline Code",
+      "inlineMath": "Format: Inline Math",
+      "strike": "Format: Strike",
+      "hyperlink": "Format: Hyperlink",
+      "image": "Format: Insert Image",
+      "clearFormat": "Format: Clear Format"
+    },
+    "window": {
+      "minimize": "Window: Minimize",
+      "toggleAlwaysOnTop": "Window: Always on Top",
+      "zoomIn": "Window: Zoom In",
+      "zoomOut": "Window: Zoom Out",
+      "toggleFullScreen": "Window: Toggle Full Screen",
+      "zoom": "Window: Zoom...",
+      "changeTheme": "Theme: Change Theme..."
+    },
+    "view": {
+      "commandPalette": "View: Show Command Palette",
+      "sourceCodeMode": "View: Toggle Source Code Mode",
+      "typewriterMode": "View: Toggle Typewriter Mode",
+      "focusMode": "View: Focus Mode",
+      "toggleSidebar": "View: Toggle Sidebar",
+      "toggleToc": "View: Toggle Table of Content",
+      "toggleTabbar": "View: Toggle Tabs",
+      "toggleDevTools": "View: Show Developer Tools (Debug)",
+      "devReload": "View: Reload Window (Debug)",
+      "reloadImages": "View: Force reload images",
+      "textDirection": "View: Set Text Direction"
+    },
+    "tabs": {
+      "cycleForward": "Misc: Cycle Tabs Forward",
+      "cycleBackward": "Misc: Cycle Tabs Backward",
+      "switchToLeft": "Misc: Switch tab to the left",
+      "switchToRight": "Misc: Switch tab to the right",
+      "switchToFirst": "Misc: Switch tab to the 1st",
+      "switchToSecond": "Misc: Switch tab to the 2nd",
+      "switchToThird": "Misc: Switch tab to the 3rd",
+      "switchToFourth": "Misc: Switch tab to the 4th",
+      "switchToFifth": "Misc: Switch tab to the 5th",
+      "switchToSixth": "Misc: Switch tab to the 6th",
+      "switchToSeventh": "Misc: Switch tab to the 7th",
+      "switchToEighth": "Misc: Switch tab to the 8th",
+      "switchToNinth": "Misc: Switch tab to the 9th",
+      "switchToTenth": "Misc: Switch tab to the 10th"
+    },
+    "docs": {
+      "userGuide": "MarkText: End User Guide",
+      "markdownSyntax": "MarkText: Markdown Syntax Guide"
+    },
+    "spellchecker": {
+      "switchLanguage": "Spelling: Switch Language",
+      "switchLanguagePlaceholder": "Select a language"
+    },
+    "misc": {
+      "changeEncoding": "File: Change Encoding",
+      "changeLineEnding": "File: Change Line Ending",
+      "trailingNewline": "File: Trailing Newline",
+      "selectOption": "Select an option",
+      "searchFile": "Search file to open",
+      "currentSuffix": " - current",
+      "trimAllTrailingNewlines": "Trim all trailing newlines",
+      "ensureSingleNewline": "Ensure single newline",
+      "disabled": "Disabled",
+      "crlf": "Carriage return and line feed (CRLF)",
+      "lf": "Line feed (LF)"
+    },
+    "export": {
+      "html": "HTML",
+      "pdf": "PDF"
+    },
+    "themes": {
+      "cadmiumLight": "Cadmium Light",
+      "dark": "Dark",
+      "graphite": "Graphite",
+      "materialDark": "Material Dark",
+      "oneDark": "One Dark",
+      "ulysses": "Ulysses"
+    },
+    "textDirection": {
+      "ltr": "Left to Right",
+      "rtl": "Right to Left"
+    }
+  }
+}

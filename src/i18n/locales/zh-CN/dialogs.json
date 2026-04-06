@@ -1,0 +1,142 @@
+{
+  "dialogs": {
+    "about": {
+      "title": "关于 MarkText",
+      "version": "版本",
+      "description": "下一代 Markdown 编辑器",
+      "close": "关闭"
+    },
+    "preferences": {
+      "title": "偏好设置",
+      "save": "保存",
+      "cancel": "取消",
+      "reset": "恢复默认"
+    },
+    "commandPalette": {
+      "title": "命令面板",
+      "placeholder": "输入要执行的命令",
+      "noResults": "未找到命令"
+    },
+    "insertTable": {
+      "title": "插入表格",
+      "rows": "行数",
+      "columns": "列数",
+      "cancel": "取消",
+      "ok": "确定"
+    },
+    "search": {
+      "searchPlaceholder": "搜索",
+      "replacePlaceholder": "替换",
+      "caseSensitive": "区分大小写",
+      "wholeWord": "全词匹配",
+      "useRegex": "使用正则表达式",
+      "replaceAll": "全部替换",
+      "replaceSingle": "替换单个",
+      "invalidRegex": "无效的正则表达式：/{{value}}/。",
+      "regexMatchEmpty": "正则表达式：/{{value}}/ 匹配空字符串。"
+    },
+    "sidebarSearch": {
+      "placeholder": "在文件夹中搜索...",
+      "noFolderOpen": "未打开文件夹",
+      "noResultsFound": "未找到结果。",
+      "cancel": "取消",
+      "openFolder": "打开文件夹",
+      "searchLimited": "搜索已限制为 100 个文件。",
+      "resultInfo": "{{matchCount}} 个匹配项在 {{fileCount}} 个文件中"
+    },
+    "export": {
+      "title": "导出选项",
+      "tabs": {
+        "info": "信息",
+        "infoDesc": "请自定义页面外观，然后点击\"导出\"继续。",
+        "page": "页面",
+        "style": "样式",
+        "theme": "主题",
+        "headerFooter": "页眉和页脚",
+        "toc": "目录"
+      },
+      "page": {
+        "htmlTitle": "页面标题：",
+        "pageSize": "页面大小：",
+        "customSize": "宽/高 (mm)：",
+        "landscape": "横向：",
+        "margin": "页面边距 (mm)：",
+        "marginTopBottom": "上/下：",
+        "marginLeftRight": "左/右："
+      },
+      "style": {
+        "overwriteFont": "覆盖主题字体设置：",
+        "fontFamily": "字体：",
+        "fontSize": "字体大小",
+        "lineHeight": "行高",
+        "autoNumbering": "自动编号标题：",
+        "showFrontMatter": "显示 Front Matter："
+      },
+      "theme": {
+        "desc": "您可以通过选择主题来更改文档外观，或创建自定义主题。",
+        "themeLabel": "主题："
+      },
+      "headerFooter": {
+        "desc": "如果定义了页眉和/或页脚，将出现在所有页面上。",
+        "headerType": "页眉类型：",
+        "headerLeft": "左侧页眉文本：",
+        "headerCenter": "主页面页眉文本：",
+        "headerRight": "右侧页眉文本：",
+        "footerType": "页脚类型：",
+        "footerLeft": "左侧页脚文本：",
+        "footerCenter": "主页面页脚文本：",
+        "footerRight": "右侧页脚文本：",
+        "customizeStyle": "自定义样式：",
+        "allowStyled": "允许样式化的页眉和页脚：",
+        "fontSize": "页眉和页脚字体大小"
+      },
+      "toc": {
+        "includeTopHeading": "包含顶级标题：",
+        "includeTopHeadingDesc": "也包括第一个标题级别。",
+        "title": "标题："
+      },
+      "exportButton": "导出..."
+    },
+    "import": {
+      "title": "导入或打开",
+      "desc": "拖放到此处以将文件导入 MarkText",
+      "supportedFormats": "支持的格式"
+    },
+    "tweet": {
+      "title": "通过推文发送反馈",
+      "feeling": "您的体验感受如何？",
+      "feedback": "告诉我们您的反馈？",
+      "reportGithub": "通过 GitHub 报告 bug 或功能请求",
+      "tweet": "发布推文"
+    },
+    "tree": {
+      "openedFiles": "已打开的文件",
+      "saveAll": "全部保存",
+      "closeAll": "全部关闭",
+      "emptyProject": "空项目",
+      "createFile": "创建文件",
+      "openFolder": "打开文件夹"
+    },
+    "toc": {
+      "title": "目录"
+    },
+    "recent": {
+      "newFile": "新建文件"
+    },
+    "titleBar": {
+      "words": "词数",
+      "characters": "字符数",
+      "paragraphs": "段落数"
+    },
+    "notifications": {
+      "uploadImage": "上传图片",
+      "spelling": "拼写检查",
+      "unableSwitchLang": "无法切换到语言\"{{lang}}\"。缺少所请求的语言词典。",
+      "errorSwitchingLang": "切换到\"{{lang}}\"时出错：{{error}}",
+      "exportFailed": "打印/导出失败",
+      "exportErrorMsg": "导出时出现问题。",
+      "exportPdfMsg": "导出 {{name}} 时出现问题。",
+      "exportPrintMsg": "打印 {{name}} 时出现问题。"
+    }
+  }
+}

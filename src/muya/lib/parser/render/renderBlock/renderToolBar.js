@@ -29,9 +29,19 @@ export const TABLE_TOOLS = Object.freeze([{
   icon: DeleteIcon
 }])
 
-const renderToolBar = (type, tools, activeBlocks) => {
+const TOOL_KEY_MAP = {
+  table: 'resizeTable',
+  left: 'alignLeft',
+  center: 'alignCenter',
+  right: 'alignRight',
+  delete: 'deleteTable'
+}
+
+const renderToolBar = (muya, type, tools, activeBlocks) => {
   const children = tools.map(tool => {
     const { label, title, icon } = tool
+    const i18nTitle = muya ? muya.t(`tableTools.${TOOL_KEY_MAP[label]}`) : title
+
     const { align } = activeBlocks[1] // activeBlocks[0] is span block. cell content.
     let selector = 'li'
     if (align && label === align) {
@@ -46,7 +56,7 @@ const renderToolBar = (type, tools, activeBlocks) => {
     return h(selector, {
       dataset: {
         label,
-        tooltip: title
+        tooltip: i18nTitle
       }
     }, iconVnode)
   })
@@ -59,6 +69,6 @@ const renderToolBar = (type, tools, activeBlocks) => {
   }, h('ul', children))
 }
 
-export const renderTableTools = (activeBlocks) => {
-  return renderToolBar('table', TABLE_TOOLS, activeBlocks)
+export const renderTableTools = (muya, activeBlocks) => {
+  return renderToolBar(muya, 'table', TABLE_TOOLS, activeBlocks)
 }

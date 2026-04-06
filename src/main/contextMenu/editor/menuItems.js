@@ -1,62 +1,62 @@
-// NOTE: This are mutable fields that may change at runtime.
+import { t } from '../../../i18n/mainProcess'
 
-export const CUT = {
-  label: 'Cut',
+export const createCutMenuItem = () => ({
+  label: t('messages.contextMenu.cut'),
   id: 'cutMenuItem',
   role: 'cut'
-}
+})
 
-export const COPY = {
-  label: 'Copy',
+export const createCopyMenuItem = () => ({
+  label: t('messages.contextMenu.copy'),
   id: 'copyMenuItem',
   role: 'copy'
-}
+})
 
-export const PASTE = {
-  label: 'Paste',
+export const createPasteMenuItem = () => ({
+  label: t('messages.contextMenu.paste'),
   id: 'pasteMenuItem',
   role: 'paste'
-}
+})
 
-export const COPY_AS_MARKDOWN = {
-  label: 'Copy As Markdown',
+export const createCopyAsMarkdownMenuItem = () => ({
+  label: t('messages.contextMenu.copyAsMarkdown'),
   id: 'copyAsMarkdownMenuItem',
   click (menuItem, targetWindow) {
     targetWindow.webContents.send('mt::cm-copy-as-markdown')
   }
-}
+})
 
-export const COPY_AS_HTML = {
-  label: 'Copy As Html',
+export const createCopyAsHtmlMenuItem = () => ({
+  label: t('messages.contextMenu.copyAsHtml'),
   id: 'copyAsHtmlMenuItem',
   click (menuItem, targetWindow) {
     targetWindow.webContents.send('mt::cm-copy-as-html')
   }
-}
+})
 
-export const PASTE_AS_PLAIN_TEXT = {
-  label: 'Paste as Plain Text',
+export const createPasteAsPlainTextMenuItem = () => ({
+  label: t('messages.contextMenu.pasteAsPlainText'),
   id: 'pasteAsPlainTextMenuItem',
   click (menuItem, targetWindow) {
     targetWindow.webContents.send('mt::cm-paste-as-plain-text')
   }
-}
+})
 
-export const INSERT_BEFORE = {
-  label: 'Insert Paragraph Before',
+export const createInsertBeforeMenuItem = () => ({
+  label: t('messages.contextMenu.insertParagraphBefore'),
   id: 'insertParagraphBeforeMenuItem',
   click (menuItem, targetWindow) {
     targetWindow.webContents.send('mt::cm-insert-paragraph', 'before')
   }
-}
+})
 
-export const INSERT_AFTER = {
-  label: 'Insert Paragraph After',
+export const createInsertAfterMenuItem = () => ({
+  label: t('messages.contextMenu.insertParagraphAfter'),
   id: 'insertParagraphAfterMenuItem',
   click (menuItem, targetWindow) {
     targetWindow.webContents.send('mt::cm-insert-paragraph', 'after')
   }
-}
+})
 
 export const SEPARATOR = {
   type: 'separator'

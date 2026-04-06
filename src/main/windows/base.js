@@ -50,7 +50,18 @@ class BaseWindow extends EventEmitter {
   }
 
   reload () {
-    this.browserWindow.reload()
+    const currentUrl = this.browserWindow.webContents.getURL()
+    const nextUrl = new URL(this._buildUrlString(this.id, this._accessor.env, this._accessor.preferences))
+
+    if (currentUrl) {
+      const current = new URL(currentUrl)
+      const currentType = current.searchParams.get('type')
+      if (currentType) {
+        nextUrl.searchParams.set('type', currentType)
+      }
+    }
+
+    this.browserWindow.loadURL(nextUrl.toString())
   }
 
   destroy () {
@@ -76,7 +87,8 @@ class BaseWindow extends EventEmitter {
       codeFontSize,
       hideScrollbar,
       theme,
-      titleBarStyle
+      titleBarStyle,
+      language
     } = userPreference.getAll()
 
     /* eslint-disable */
@@ -97,6 +109,7 @@ class BaseWindow extends EventEmitter {
     url.searchParams.set('hsb', hideScrollbar ? '1' : '0')
     url.searchParams.set('theme', theme)
     url.searchParams.set('tbs', titleBarStyle)
+    url.searchParams.set('lang', language)
 
     return url
   }

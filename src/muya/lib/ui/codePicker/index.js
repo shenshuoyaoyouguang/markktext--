@@ -75,7 +75,7 @@ class CodePicker extends BaseScrollFloat {
     })
 
     if (children.length === 0) {
-      children = h('div.no-result', 'No result')
+      children = h('div.no-result', this.muya.t('codePicker.noResult'))
     }
     const vnode = h('ul', children)
 

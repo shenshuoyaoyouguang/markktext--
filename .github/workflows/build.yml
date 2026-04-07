@@ -83,10 +83,13 @@ jobs:
           yarn run lint
           yarn run validate-licenses
 
-      - name: Run unit and E2E tests
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: yarn run test
+      - name: Run unit and E2E tests (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a yarn run test
+
+      - name: Run unit and E2E tests (macOS)
+        if: runner.os == 'macOS'
+        run: yarn run test
 
       - name: Build
         run: yarn build:bin

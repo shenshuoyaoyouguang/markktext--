@@ -15,8 +15,10 @@ const getTempPath = () => {
 }
 
 const getElectronPath = () => {
-  const launcherName = process.platform === 'win32' ? 'electron.cmd' : 'electron'
-  return path.resolve(path.join('node_modules', '.bin', launcherName))
+  if (process.platform === 'win32') {
+    return path.resolve(path.join('node_modules', 'electron', 'dist', 'electron.exe'))
+  }
+  return path.resolve(path.join('node_modules', '.bin', 'electron'))
 }
 
 const launchElectron = async userArgs => {

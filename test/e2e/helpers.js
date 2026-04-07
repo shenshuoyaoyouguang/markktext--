@@ -27,13 +27,13 @@ const launchElectron = async userArgs => {
   const baseArgs = process.platform === 'linux'
     ? ['--no-sandbox']
     : process.platform === 'win32'
-      ? ['--disable-gpu']
+      ? ['--disable-gpu', '--no-sandbox']
       : []
   const args = baseArgs.concat([mainEntrypoint, '--user-data-dir', getTempPath()], userArgs)
   const app = await _electron.launch({
     executablePath,
     args,
-    timeout: 30000
+    timeout: 90000
   })
   const page = await app.firstWindow()
   await page.waitForLoadState('domcontentloaded')

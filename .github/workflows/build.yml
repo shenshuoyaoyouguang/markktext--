@@ -92,7 +92,9 @@ jobs:
         run: yarn run test
 
       - name: Build
-        run: yarn build:bin
+        # Use the workspace native modules as-is. On Windows, electron-builder's
+        # internal npmRebuild path can drop keytar.node before packaging.
+        run: yarn run build:bin:ci
 
   windows:
     name: windows (${{ matrix.windows_runner }})

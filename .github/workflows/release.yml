@@ -302,7 +302,9 @@ jobs:
           if-no-files-found: warn
 
       - name: Build and release
-        run: yarn run release:win --publish always
+        # Use the workspace native modules as-is. On Windows, electron-builder's
+        # internal npmRebuild path can drop keytar.node before packaging.
+        run: yarn run release:win:ci
 
       - name: Verify packaged Windows bundle
         run: node tools/verifyPackagedWindowsBundle.js build/win-unpacked

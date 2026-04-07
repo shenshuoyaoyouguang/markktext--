@@ -178,6 +178,9 @@ class StateRender {
     })
     const newVdom = h(selector, children)
     const rootDom = document.querySelector(selector) || this.container
+    if (!rootDom) {
+      return
+    }
     const oldVdom = toVNode(rootDom)
 
     patch(oldVdom, newVdom)
@@ -241,6 +244,9 @@ class StateRender {
     const selector = `#${block.key}`
     const newVdom = this.renderBlock(null, block, activeBlocks, matches, true)
     const rootDom = document.querySelector(selector)
+    if (!rootDom) {
+      return
+    }
     const oldVdom = toVNode(rootDom)
     patch(oldVdom, newVdom)
     this.renderMermaid()

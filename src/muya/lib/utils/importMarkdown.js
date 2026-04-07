@@ -208,7 +208,7 @@ const importRegister = ContentState => {
                   // There are three status `loaded`, `noexist` and `cached`.
                   // if the status is `loaded`, indicated that it's a new loaded language
                   const needRender = infoList.some(({ status }) => status === 'loaded')
-                  if (needRender) {
+                  if (needRender && this.stateRender.container) {
                     this.render()
                   }
                 })

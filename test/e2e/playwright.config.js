@@ -1,5 +1,5 @@
 const config = {
-  timeout: 90000,
+  timeout: process.platform === 'win32' ? 180000 : 90000,
   workers: 1,
   use: {
     headless: false,

@@ -166,6 +166,10 @@ jobs:
           yarn run lint
           yarn run validate-licenses
 
+      - name: Exclude workspace from Windows Defender
+        run: Add-MpPreference -ExclusionPath "${{ github.workspace }}"
+        shell: pwsh
+
       - name: Run unit and E2E tests
         run: yarn run test
 

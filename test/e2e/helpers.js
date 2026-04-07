@@ -33,7 +33,7 @@ const launchElectron = async userArgs => {
   const app = await _electron.launch({
     executablePath,
     args,
-    timeout: 90000
+    timeout: process.platform === 'win32' ? 180000 : 90000
   })
   const page = await app.firstWindow()
   await page.waitForLoadState('domcontentloaded')

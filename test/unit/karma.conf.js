@@ -50,6 +50,7 @@ module.exports = config => {
     customLaunchers: {
       CustomElectron: {
         base: 'Electron',
+        flags: ['--no-sandbox'],
         browserWindowOptions: {
           webPreferences: {
             contextIsolation: false,

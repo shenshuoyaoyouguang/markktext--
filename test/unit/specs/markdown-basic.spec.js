@@ -11,6 +11,7 @@ const createMuyaContext = options => {
   const ctx = {}
   ctx.options = Object.assign({}, MUYA_DEFAULT_OPTION, options)
   ctx.eventCenter = new EventCenter()
+  ctx.t = () => ''
   ctx.contentState = new ContentState(ctx, ctx.options)
   return ctx
 }

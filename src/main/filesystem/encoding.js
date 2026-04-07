@@ -1,4 +1,4 @@
-import ced from 'ced'
+import log from 'electron-log'
 
 const CED_ICONV_ENCODINGS = {
   'BIG5-CP950': 'big5',
@@ -21,6 +21,41 @@ const BOM_ENCODINGS = {
   utf8: [0xEF, 0xBB, 0xBF],
   utf16be: [0xFE, 0xFF],
   utf16le: [0xFF, 0xFE]
+}
+
+let cedDetector = null
+let cedLoadAttempted = false
+let cedUnavailableWarningShown = false
+
+const loadCedDetector = () => {
+  if (cedLoadAttempted) {
+    return cedDetector
+  }
+
+  cedLoadAttempted = true
+
+  try {
+    // NOTE: `ced` is a native addon. Loading it lazily prevents the whole
+    // Electron main process from crashing during startup when the addon is
+    // missing or built for the wrong ABI. In that case we fall back to UTF-8
+    // and log a clear diagnostic instead of timing out later in E2E startup.
+    // eslint-disable-next-line global-require
+    cedDetector = require('ced')
+  } catch (error) {
+    log.error('Unable to load native encoding detector "ced". Falling back to UTF-8.', error)
+    cedDetector = null
+  }
+
+  return cedDetector
+}
+
+const warnCedFallbackOnce = () => {
+  if (cedUnavailableWarningShown) {
+    return
+  }
+
+  cedUnavailableWarningShown = true
+  log.warn('Encoding auto-detection is unavailable because native module "ced" could not be loaded. Falling back to UTF-8.')
 }
 
 const checkSequence = (buffer, sequence) => {
@@ -63,11 +98,16 @@ export const guessEncoding = (buffer, autoGuessEncoding) => {
 
   // Auto guess encoding, otherwise use UTF8.
   if (autoGuessEncoding) {
-    encoding = ced(buffer)
-    if (CED_ICONV_ENCODINGS[encoding]) {
-      encoding = CED_ICONV_ENCODINGS[encoding]
+    const detector = loadCedDetector()
+    if (detector) {
+      encoding = detector(buffer)
+      if (CED_ICONV_ENCODINGS[encoding]) {
+        encoding = CED_ICONV_ENCODINGS[encoding]
+      } else {
+        encoding = encoding.toLowerCase().replace(/-_/g, '')
+      }
     } else {
-      encoding = encoding.toLowerCase().replace(/-_/g, '')
+      warnCedFallbackOnce()
     }
   }
   return { encoding, isBom }

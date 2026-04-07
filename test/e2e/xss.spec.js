@@ -3,12 +3,10 @@ const { launchElectron } = require('./helpers')
 
 test.describe('Test XSS Vulnerabilities', async () => {
   let app = null
-  let page = null
 
   test.beforeAll(async () => {
-    const { app: electronApp, page: firstPage } = await launchElectron(['test/e2e/data/xss.md'])
+    const { app: electronApp } = await launchElectron(['test/e2e/data/xss.md'], { label: 'xss-spec' })
     app = electronApp
-    page = firstPage
 
     // Wait to parse and render the document.
     await new Promise((resolve) => setTimeout(resolve, 3000))

@@ -6,7 +6,7 @@ test.describe('Check Launch MarkText', async () => {
   let page = null
 
   test.beforeAll(async () => {
-    const { app: electronApp, page: firstPage } = await launchElectron()
+    const { app: electronApp, page: firstPage } = await launchElectron([], { label: 'launch-spec' })
     app = electronApp
     page = firstPage
   })

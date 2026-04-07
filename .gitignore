@@ -16,3 +16,4 @@ thumbs.db
 .env
 .eslintcache
 .omc/
+test-artifacts/

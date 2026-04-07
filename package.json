@@ -22,6 +22,8 @@
     "pack:main": "cross-env NODE_ENV=production webpack --progress --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "node .electron-vue/postinstall.js",
+    "rebuild:ced": "electron-rebuild -f -o ced",
+    "rebuild:startup-native": "electron-rebuild -f -o ced,native-keymap",
     "test": "yarn run unit && yarn run e2e",
     "test:specs": "node -r esm test/specs/commonMark/run.spec.js && node -r esm test/specs/gfm/run.spec.js",
     "unit": "cross-env NODE_ENV=test ELECTRON_DISABLE_SECURITY_WARNINGS=true karma start test/unit/karma.conf.js",

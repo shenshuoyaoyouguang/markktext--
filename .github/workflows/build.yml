@@ -167,31 +167,14 @@ jobs:
         # if: ${{ steps.cacheNodeModules.outputs.cache-hit != 'true' }}
         run: yarn install --check-files --frozen-lockfile
 
-      - name: Rebuild startup native modules for Electron ABI
-        run: yarn run rebuild:startup-native
-        shell: pwsh
-        env:
-          GYP_MSVS_VERSION: 2022
-          npm_config_msvs_version: 2022
-
-      - name: Lint
-        run: |
-          yarn run lint
-          yarn run validate-licenses
-
-      - name: Exclude workspace from Windows Defender
-        run: Add-MpPreference -ExclusionPath "${{ github.workspace }}"
-        shell: pwsh
-
       - name: Prepare Windows diagnostics workspace
         run: |
           Remove-Item -Recurse -Force test-artifacts -ErrorAction SilentlyContinue
-          New-Item -ItemType Directory -Force test-artifacts | Out-Null
+          New-Item -ItemType Directory -Force test-artifacts\runner-env | Out-Null
         shell: pwsh
 
       - name: Capture Windows runner environment
         run: |
-          New-Item -ItemType Directory -Force test-artifacts\runner-env | Out-Null
           $runnerInfo = [ordered]@{
             requestedRunner = '${{ matrix.windows_runner }}'
             imageOs = $env:ImageOS
@@ -211,6 +194,40 @@ jobs:
           Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, BuildNumber | ConvertTo-Json | Set-Content test-artifacts\runner-env\os-info.json
           Get-ChildItem node_modules -Recurse -Filter *.node | Select-Object FullName, Length | Format-Table -AutoSize | Out-String | Set-Content test-artifacts\runner-env\native-modules.txt
           Get-ChildItem node_modules\ced -Recurse | Select-Object FullName, Length | Format-Table -AutoSize | Out-String | Set-Content test-artifacts\runner-env\ced-tree.txt
+        shell: pwsh
+
+      - name: Rebuild startup native modules for Electron ABI
+        id: rebuild_startup_native
+        continue-on-error: true
+        run: |
+          $logPath = 'test-artifacts\runner-env\rebuild-startup-native.log'
+          & yarn run rebuild:startup-native *>&1 | Tee-Object -FilePath $logPath
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+        shell: pwsh
+        env:
+          GYP_MSVS_VERSION: 2022
+          npm_config_msvs_version: 2022
+
+      - name: Record native rebuild outcome
+        if: always()
+        run: |
+          $result = [ordered]@{
+            runner = '${{ matrix.windows_runner }}'
+            outcome = '${{ steps.rebuild_startup_native.outcome }}'
+            conclusion = '${{ steps.rebuild_startup_native.conclusion }}'
+          }
+          $result | ConvertTo-Json -Depth 3 | Set-Content test-artifacts\runner-env\rebuild-startup-native-result.json
+        shell: pwsh
+
+      - name: Lint
+        run: |
+          yarn run lint
+          yarn run validate-licenses
+
+      - name: Exclude workspace from Windows Defender
+        run: Add-MpPreference -ExclusionPath "${{ github.workspace }}"
         shell: pwsh
 
       - name: Run unit tests

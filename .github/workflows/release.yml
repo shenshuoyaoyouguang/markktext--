@@ -214,6 +214,7 @@ jobs:
 
       - name: Rebuild startup native modules for Electron ABI
         id: rebuild_startup_native
+        continue-on-error: true
         run: |
           $logPath = 'test-artifacts\runner-env\rebuild-startup-native.log'
           & yarn run rebuild:startup-native *>&1 | Tee-Object -FilePath $logPath

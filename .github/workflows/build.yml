@@ -206,6 +206,7 @@ jobs:
           if ($exitCode -ne 0) {
             Write-Host "Native rebuild failed with exit code $exitCode, but this step is diagnostic-only so the workflow will continue."
           }
+          exit 0
         shell: pwsh
         env:
           GYP_MSVS_VERSION: 2022

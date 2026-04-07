@@ -1,5 +1,6 @@
 productName: "MarkText"
 appId: "com.github.marktext.marktext"
+afterPack: "./tools/ensureKeytarAfterPack.js"
 
 asar: true
 asarUnpack:

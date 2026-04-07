@@ -60,7 +60,7 @@ publish:
 - provider: "github"
   owner: "${env.EP_GH_OWNER}"
   repo: "${env.EP_GH_REPO}"
-  releaseType: "draft"
+  releaseType: "release"
 
 fileAssociations:
 - ext:

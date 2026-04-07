@@ -25,6 +25,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       EP_GH_OWNER: ${{ github.repository_owner }}
       EP_GH_REPO: ${{ github.event.repository.name }}
+      EP_GH_IGNORE_TIME: "true"
       CI: "true"
 
     steps:
@@ -130,6 +131,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       EP_GH_OWNER: ${{ github.repository_owner }}
       EP_GH_REPO: ${{ github.event.repository.name }}
+      EP_GH_IGNORE_TIME: "true"
       CI: "true"
 
     steps:

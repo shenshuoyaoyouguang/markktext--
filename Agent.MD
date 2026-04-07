@@ -17,6 +17,8 @@
 - Fix: add explicit `publish` config in `electron-builder.yml` and source `owner` / `repo` from workflow env (`EP_GH_OWNER`, `EP_GH_REPO`) so release assets go to the current fork instead of relying on repository autodetection.
 - Surprise #2: the Windows `rebuild:startup-native` step was intended to be diagnostic-only, but a non-zero `electron-rebuild` exit still failed the GitHub Actions step before the rest of the Windows verification/build pipeline could run.
 - Fix: mark that step `continue-on-error: true` in the release workflow so diagnostics are still captured, while lint/tests/build continue.
+- Follow-up: the fork's `v0.17.1` release is now a published release, so keeping `publish.releaseType: draft` causes electron-builder to skip assets with `existing type not compatible with publishing type`.
+- Follow-up fix: set `publish.releaseType: release` and export `EP_GH_IGNORE_TIME=true` in `release.yml`; otherwise electron-publish refuses to upload to an existing published release that is more than two hours old.
 
 ## 2026-04-07 — Windows packaged app missing keytar.node
 

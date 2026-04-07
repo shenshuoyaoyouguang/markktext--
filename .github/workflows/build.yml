@@ -130,7 +130,7 @@ jobs:
         shell: pwsh
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
         with:
           vs-version: '17.0'
 
@@ -266,7 +266,7 @@ jobs:
 
       - name: Upload Windows E2E diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows-e2e-diagnostics-${{ matrix.windows_runner }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: test-artifacts/**

@@ -15,7 +15,9 @@ test.describe('Test XSS Vulnerabilities', async () => {
   })
 
   test.afterAll(async () => {
-    await app.close()
+    if (app) {
+      await app.close()
+    }
   })
 
   test('Load malicious document', async () => {

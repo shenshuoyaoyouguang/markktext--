@@ -12,7 +12,9 @@ test.describe('Check Launch MarkText', async () => {
   })
 
   test.afterAll(async () => {
-    await app.close()
+    if (app) {
+      await app.close()
+    }
   })
 
   test('Empty MarkText', async () => {

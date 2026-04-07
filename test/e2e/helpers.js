@@ -26,7 +26,9 @@ const launchElectron = async userArgs => {
   const executablePath = getElectronPath()
   const baseArgs = process.platform === 'linux'
     ? ['--no-sandbox']
-    : []
+    : process.platform === 'win32'
+      ? ['--disable-gpu']
+      : []
   const args = baseArgs.concat([mainEntrypoint, '--user-data-dir', getTempPath()], userArgs)
   const app = await _electron.launch({
     executablePath,

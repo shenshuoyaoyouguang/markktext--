@@ -304,6 +304,10 @@ jobs:
       - name: Build and release
         run: yarn run release:win --publish always
 
+      - name: Verify packaged Windows bundle
+        run: node tools/verifyPackagedWindowsBundle.js build/win-unpacked
+        shell: pwsh
+
       - name: Calculate checksums
         run: |
           get-filehash -Algorithm SHA256 "build\marktext-setup.exe"

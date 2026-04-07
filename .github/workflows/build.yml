@@ -282,3 +282,7 @@ jobs:
 
       - name: Build
         run: yarn build:bin
+
+      - name: Verify packaged Windows bundle
+        run: node tools/verifyPackagedWindowsBundle.js build/win-unpacked
+        shell: pwsh

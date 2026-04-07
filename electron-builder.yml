@@ -10,6 +10,9 @@ directories:
 buildDependenciesFromSource: true
 files:
 - "dist/electron/**/*"
+# keytar's upstream package.json only whitelists lib/src metadata, so include
+# the compiled native binding explicitly or packaged apps can miss keytar.node.
+- "node_modules/keytar/build/Release/**/*"
 # Don't bundle these files
 - "!**/node_modules/**/{CHANGELOG.md,README.md,README,readme.md,readme}"
 - "!node_modules/css-b64-images/{draft.png,draft.xcf}"

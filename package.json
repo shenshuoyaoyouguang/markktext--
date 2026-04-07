@@ -33,7 +33,8 @@
     "rebuild": "electron-rebuild -f",
     "gen-third-party": "node tools/generateThirdPartyLicense.js",
     "validate-licenses": "node tools/validateLicenses.js",
-    "deobfuscateStackTrace": "node tools/deobfuscateStackTrace.js"
+    "deobfuscateStackTrace": "node tools/deobfuscateStackTrace.js",
+    "verify:win-package": "node tools/verifyPackagedWindowsBundle.js build/win-unpacked"
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",

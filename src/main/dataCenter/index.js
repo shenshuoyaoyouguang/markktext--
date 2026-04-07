@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import EventEmitter from 'events'
 import { BrowserWindow, ipcMain, dialog } from 'electron'
-import keytar from 'keytar'
 import schema from './schema'
 import Store from 'electron-store'
 import log from 'electron-log'
@@ -10,6 +9,37 @@ import { ensureDirSync } from 'common/filesystem'
 import { IMAGE_EXTENSIONS } from 'common/filesystem/paths'
 
 const DATA_CENTER_NAME = 'dataCenter'
+let keytar = null
+let keytarLoadAttempted = false
+let keytarUnavailableWarningShown = false
+
+const loadKeytar = () => {
+  if (keytarLoadAttempted) {
+    return keytar
+  }
+
+  keytarLoadAttempted = true
+
+  try {
+    // NOTE: `keytar` is a native addon. Load it lazily so a missing or
+    // unpacked binding does not crash the whole Electron main process at startup.
+    keytar = require('keytar')
+  } catch (error) {
+    log.error('Unable to load native secure storage module "keytar". GitHub token persistence will be unavailable.', error)
+    keytar = null
+  }
+
+  return keytar
+}
+
+const warnKeytarUnavailable = () => {
+  if (keytarUnavailableWarningShown) {
+    return
+  }
+
+  keytarUnavailableWarningShown = true
+  log.warn('Secure credential storage is unavailable because native module "keytar" could not be loaded. GitHub token persistence is disabled until it is restored.')
+}
 
 class DataCenter extends EventEmitter {
   constructor (paths) {
@@ -55,9 +85,16 @@ class DataCenter extends EventEmitter {
   async getAll () {
     const { serviceName, encryptKeys } = this
     const data = this.store.store
+    const secureStore = loadKeytar()
+
+    if (!secureStore) {
+      warnKeytarUnavailable()
+      return data
+    }
+
     try {
       const encryptData = await Promise.all(encryptKeys.map(key => {
-        return keytar.getPassword(serviceName, key)
+        return secureStore.getPassword(serviceName, key)
       }))
       const encryptObj = encryptKeys.reduce((acc, k, i) => {
         return {
@@ -110,7 +147,13 @@ class DataCenter extends EventEmitter {
   getItem (key) {
     const { encryptKeys, serviceName } = this
     if (encryptKeys.includes(key)) {
-      return keytar.getPassword(serviceName, key)
+      const secureStore = loadKeytar()
+      if (!secureStore) {
+        warnKeytarUnavailable()
+        return Promise.resolve('')
+      }
+
+      return secureStore.getPassword(serviceName, key)
     } else {
       const value = this.store.get(key)
       return Promise.resolve(value)
@@ -124,8 +167,14 @@ class DataCenter extends EventEmitter {
     }
     ipcMain.emit('broadcast-user-data-changed', { [key]: value })
     if (encryptKeys.includes(key)) {
+      const secureStore = loadKeytar()
+      if (!secureStore) {
+        warnKeytarUnavailable()
+        return
+      }
+
       try {
-        return await keytar.setPassword(serviceName, key, value)
+        return await secureStore.setPassword(serviceName, key, value)
       } catch (err) {
         log.error('Keytar error:', err)
       }

@@ -5,6 +5,9 @@ on:
     branches:
       - 'release-v*'
 
+permissions:
+  contents: write
+
 jobs:
   unix:
     runs-on: ${{ matrix.os }}
@@ -20,6 +23,8 @@ jobs:
       MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      EP_GH_OWNER: ${{ github.repository_owner }}
+      EP_GH_REPO: ${{ github.event.repository.name }}
       CI: "true"
 
     steps:
@@ -87,14 +92,14 @@ jobs:
 
       - name: Build and release
         run: |
-              if [ "$RUNNER_OS" == "Linux" ]; then
-                yarn run release:linux --publish always
-              elif [ "$RUNNER_OS" == "macOS" ]; then
-                yarn run release:mac --publish always
-              else
-                echo "$RUNNER_OS not supported"
-                exit 1
-              fi
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            yarn run release:linux --publish always
+          elif [ "$RUNNER_OS" == "macOS" ]; then
+            yarn run release:mac --publish always
+          else
+            echo "$RUNNER_OS not supported"
+            exit 1
+          fi
 
       - name: Calculate checksums
         if: runner.os == 'Linux'
@@ -123,6 +128,8 @@ jobs:
       MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      EP_GH_OWNER: ${{ github.repository_owner }}
+      EP_GH_REPO: ${{ github.event.repository.name }}
       CI: "true"
 
     steps:
@@ -144,7 +151,7 @@ jobs:
         shell: pwsh
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
         with:
           vs-version: '17.0'
 
@@ -157,14 +164,6 @@ jobs:
         env:
           GYP_MSVS_VERSION: 2022
           npm_config_msvs_version: 2022
-
-      - name: Cache node_modules
-        uses: actions/cache@v5
-        with:
-          path: ${{ github.workspace }}\node_modules
-          key: ${{ runner.os }}-node_modules-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-cache-v2-
 
       - name: Cache Electron
         uses: actions/cache@v5
@@ -179,15 +178,127 @@ jobs:
           key: ${{ runner.os }}-electron-builder-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
 
       - name: Install dependencies
+        # Do not cache node_modules on Windows. The build/rebuild pipeline can
+        # mutate native addons (for example keytar/ced), and restoring a stale
+        # node_modules cache makes startup regressions extremely hard to reason about.
         run: yarn install --check-files --frozen-lockfile
+
+      - name: Prepare Windows diagnostics workspace
+        run: |
+          Remove-Item -Recurse -Force test-artifacts -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force test-artifacts\runner-env | Out-Null
+        shell: pwsh
+
+      - name: Capture Windows runner environment
+        run: |
+          $runnerInfo = [ordered]@{
+            requestedRunner = 'windows-latest'
+            imageOs = $env:ImageOS
+            imageVersion = $env:ImageVersion
+            osVersion = [System.Environment]::OSVersion.VersionString
+            nodeVersion = node --version
+            npmVersion = npm --version
+            yarnVersion = yarn --version
+            localAppData = $env:LOCALAPPDATA
+            temp = $env:TEMP
+            tmp = $env:TMP
+            electronCachePath = Join-Path $env:LOCALAPPDATA 'electron\Cache'
+            electronBuilderCachePath = Join-Path $env:LOCALAPPDATA 'electron-builder\cache'
+          }
+          $runnerInfo | ConvertTo-Json -Depth 5 | Set-Content test-artifacts\runner-env\runner-info.json
+          Get-ChildItem Env:* | Sort-Object Name | Out-String | Set-Content test-artifacts\runner-env\environment.txt
+          Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, BuildNumber | ConvertTo-Json | Set-Content test-artifacts\runner-env\os-info.json
+          Get-ChildItem node_modules -Recurse -Filter *.node | Select-Object FullName, Length | Format-Table -AutoSize | Out-String | Set-Content test-artifacts\runner-env\native-modules.txt
+          Get-ChildItem node_modules\ced -Recurse | Select-Object FullName, Length | Format-Table -AutoSize | Out-String | Set-Content test-artifacts\runner-env\ced-tree.txt
+        shell: pwsh
+
+      - name: Rebuild startup native modules for Electron ABI
+        id: rebuild_startup_native
+        run: |
+          $logPath = 'test-artifacts\runner-env\rebuild-startup-native.log'
+          & yarn run rebuild:startup-native *>&1 | Tee-Object -FilePath $logPath
+          $exitCode = $LASTEXITCODE
+          if ($null -eq $exitCode) {
+            $exitCode = 0
+          }
+          $outcome = if ($exitCode -eq 0) { 'success' } else { 'failure' }
+          "exit_code=$exitCode" >> $env:GITHUB_OUTPUT
+          "outcome=$outcome" >> $env:GITHUB_OUTPUT
+          if ($exitCode -ne 0) {
+            Write-Host "Native rebuild failed with exit code $exitCode, but this step is diagnostic-only so the workflow will continue."
+          }
+        shell: pwsh
+        env:
+          GYP_MSVS_VERSION: 2022
+          npm_config_msvs_version: 2022
+
+      - name: Record native rebuild outcome
+        if: always()
+        run: |
+          $result = [ordered]@{
+            runner = 'windows-latest'
+            outcome = '${{ steps.rebuild_startup_native.outputs.outcome }}'
+            exitCode = '${{ steps.rebuild_startup_native.outputs.exit_code }}'
+            stepStatus = '${{ steps.rebuild_startup_native.outcome }}'
+          }
+          $result | ConvertTo-Json -Depth 3 | Set-Content test-artifacts\runner-env\rebuild-startup-native-result.json
+        shell: pwsh
 
       - name: Lint
         run: |
           yarn run lint
           yarn run validate-licenses
 
-      - name: Run unit and E2E tests
-        run: yarn run test
+      - name: Exclude workspace from Windows Defender
+        run: Add-MpPreference -ExclusionPath "${{ github.workspace }}"
+        shell: pwsh
+
+      - name: Run unit tests
+        run: yarn run unit
+        shell: pwsh
+        env:
+          MARKTEXT_E2E_DIAGNOSTICS: "1"
+          ELECTRON_ENABLE_LOGGING: "1"
+          ELECTRON_ENABLE_STACK_DUMPING: "1"
+          CHROME_LOG_FILE: ${{ github.workspace }}\test-artifacts\chrome-debug.log
+
+      - name: Pack application for Windows E2E diagnostics
+        run: yarn run pack
+        shell: pwsh
+        env:
+          MARKTEXT_E2E_DIAGNOSTICS: "1"
+          ELECTRON_ENABLE_LOGGING: "1"
+          ELECTRON_ENABLE_STACK_DUMPING: "1"
+          CHROME_LOG_FILE: ${{ github.workspace }}\test-artifacts\chrome-debug.log
+
+      - name: Preflight Electron launch diagnostics
+        id: electron_preflight
+        continue-on-error: true
+        run: |
+          node tools/electronPreflight.js --label "blank-launch" --timeout 30000 --runner "windows-latest" --image-os "$env:ImageOS" --image-version "$env:ImageVersion"
+        shell: pwsh
+        env:
+          ELECTRON_ENABLE_LOGGING: "1"
+          ELECTRON_ENABLE_STACK_DUMPING: "1"
+
+      - name: Run Playwright E2E tests
+        run: |
+          npx playwright test -c test/e2e/playwright.config.js test/e2e
+        shell: pwsh
+        env:
+          MARKTEXT_EXIT_ON_ERROR: "1"
+          MARKTEXT_E2E_DIAGNOSTICS: "1"
+          ELECTRON_ENABLE_LOGGING: "1"
+          ELECTRON_ENABLE_STACK_DUMPING: "1"
+          CHROME_LOG_FILE: ${{ github.workspace }}\test-artifacts\chrome-debug.log
+
+      - name: Upload Windows E2E diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: windows-e2e-diagnostics-release-${{ github.run_id }}-${{ github.run_attempt }}
+          path: test-artifacts/**
+          if-no-files-found: warn
 
       - name: Build and release
         run: yarn run release:win --publish always

@@ -52,6 +52,11 @@ extraFiles:
 - "LICENSE"
 - from: "resources/THIRD-PARTY-LICENSES.txt"
   to: "THIRD-PARTY-LICENSES.txt"
+publish:
+- provider: "github"
+  owner: "${env.EP_GH_OWNER}"
+  repo: "${env.EP_GH_REPO}"
+  releaseType: "draft"
 
 fileAssociations:
 - ext:

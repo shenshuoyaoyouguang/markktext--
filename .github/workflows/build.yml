@@ -144,15 +144,6 @@ jobs:
           GYP_MSVS_VERSION: 2022
           npm_config_msvs_version: 2022
 
-      - name: Cache node_modules
-        uses: actions/cache@v5
-        id: cacheNodeModules
-        with:
-          path: ${{ github.workspace }}\node_modules
-          key: ${{ matrix.windows_runner }}-node_modules-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
-          restore-keys: |
-            ${{ matrix.windows_runner }}-node_modules-cache-v2-
-
       - name: Cache Electron
         uses: actions/cache@v5
         with:
@@ -166,8 +157,9 @@ jobs:
           key: ${{ matrix.windows_runner }}-electron-builder-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
 
       - name: Install dependencies
-        # Windows worker fail sometimes because a module cannot be found.
-        # if: ${{ steps.cacheNodeModules.outputs.cache-hit != 'true' }}
+        # Do not cache node_modules on Windows. The build/rebuild pipeline can
+        # mutate native addons (for example keytar/ced), and restoring a stale
+        # node_modules cache makes startup regressions extremely hard to reason about.
         run: yarn install --check-files --frozen-lockfile
 
       - name: Prepare Windows diagnostics workspace

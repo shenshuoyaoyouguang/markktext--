@@ -20,6 +20,7 @@ jobs:
       MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CI: "true"
 
     steps:
       - name: Check out Git repository
@@ -39,6 +40,13 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev rpm
+
+      - name: Install Python for node-gyp (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install python@3.11
+          echo "/opt/homebrew/opt/python@3.11/libexec/bin" >> $GITHUB_PATH
+          ln -sf /opt/homebrew/opt/python@3.11/libexec/bin/python3.11 /usr/local/bin/python3
 
       - name: Cache node_modules
         uses: actions/cache@v5
@@ -115,6 +123,7 @@ jobs:
       MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CI: "true"
 
     steps:
       - name: Check out Git repository
@@ -129,12 +138,25 @@ jobs:
           cache-dependency-path: yarn.lock
 
       # Workaround: Fix native build failure due to outdated node-gyp version.
+      - name: Install Visual Studio Build Tools
+        run: |
+          choco install visualstudio2022-workload-vctools --package-parameters "--includeRecommended"
+        shell: pwsh
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
       - name: Fix node-gyp
         run: |
           npm install --global node-gyp@latest
           npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
           node-gyp install
         shell: pwsh
+        env:
+          GYP_MSVS_VERSION: 2022
+          npm_config_msvs_version: 2022
 
       - name: Cache node_modules
         uses: actions/cache@v5

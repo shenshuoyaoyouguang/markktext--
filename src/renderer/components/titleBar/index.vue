@@ -239,10 +239,10 @@ export default {
     }
   },
   beforeDestroy () {
-    ipcRenderer.off('window-maximize', this.onMaximize)
-    ipcRenderer.off('window-unmaximize', this.onUnmaximize)
-    ipcRenderer.off('window-enter-full-screen', this.onEnterFullScreen)
-    ipcRenderer.off('window-leave-full-screen', this.onLeaveFullScreen)
+    ipcRenderer.off('mt::window-maximize', this.onMaximize)
+    ipcRenderer.off('mt::window-unmaximize', this.onUnmaximize)
+    ipcRenderer.off('mt::window-enter-full-screen', this.onEnterFullScreen)
+    ipcRenderer.off('mt::window-leave-full-screen', this.onLeaveFullScreen)
   }
 }
 </script>
@@ -326,7 +326,7 @@ export default {
     visibility: visible;
   }
   .title:hover {
-    color: var(sideBarTitleColor);
+    color: var(--sideBarTitleColor);
   }
 
   .left-toolbar {
@@ -400,7 +400,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.1);
   }
   .frameless-titlebar-button svg {
-    fill: #000000
+    fill: var(--editorColor);
   }
   .frameless-titlebar-close:hover svg {
     fill: #ffffff

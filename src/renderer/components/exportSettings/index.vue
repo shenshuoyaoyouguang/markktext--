@@ -107,7 +107,7 @@
             :description="$t('dialogs.export.theme.themeLabel')"
             more="https://github.com/marktext/marktext/blob/develop/docs/EXPORT_THEMES.md"
             :value="theme"
-            :options="themeList"
+            :options="themeListComputed"
             :onChange="value => onSelectChange('theme', value)"
           ></cur-select>
         </el-tab-pane>
@@ -230,10 +230,10 @@ import FontTextBox from '@/prefComponents/common/fontTextBox'
 import Range from '@/prefComponents/common/range'
 import TextBox from '@/prefComponents/common/textBox'
 import {
-  pageSizeList,
-  headerFooterTypes,
-  headerFooterStyles,
-  exportThemeList
+  buildPageSizeOptions,
+  buildHeaderFooterTypeOptions,
+  buildHeaderFooterStyleOptions,
+  buildExportThemeOptions
 } from './exportOptions'
 
 export default {
@@ -247,9 +247,6 @@ export default {
   data () {
     this.exportType = ''
     this.themesLoaded = false
-    this.pageSizeList = pageSizeList
-    this.headerFooterTypes = headerFooterTypes
-    this.headerFooterStyles = headerFooterStyles
     return {
       isPrintable: true,
       showExportSettingsDialog: false,
@@ -270,7 +267,7 @@ export default {
       autoNumberingHeadings: false,
       showFrontMatter: false,
       theme: 'default',
-      themeList: exportThemeList,
+      extraThemes: [],
       headerType: 0,
       headerTextLeft: '',
       headerTextCenter: '',
@@ -287,8 +284,20 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-    })
+    ...mapState({}),
+    pageSizeList () {
+      return buildPageSizeOptions(this.$t)
+    },
+    headerFooterTypes () {
+      return buildHeaderFooterTypeOptions(this.$t)
+    },
+    headerFooterStyles () {
+      return buildHeaderFooterStyleOptions(this.$t)
+    },
+    themeListComputed () {
+      const baseThemes = buildExportThemeOptions(this.$t)
+      return baseThemes.concat(this.extraThemes.filter(t => !baseThemes.some(b => b.value === t.value)))
+    }
   },
   created () {
     bus.$on('showExportDialog', this.showDialog)
@@ -432,7 +441,7 @@ export default {
                 label = filename
               }
 
-              this.themeList.push({
+              this.extraThemes.push({
                 value: filename,
                 label
               })

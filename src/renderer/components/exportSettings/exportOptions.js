@@ -1,61 +1,61 @@
-export const pageSizeList = [
+export const buildPageSizeOptions = (t) => [
   {
-    label: 'A3 (297mm x 420mm)',
+    label: t('messages.exportOptions.pageSize.A3'),
     value: 'A3'
   }, {
-    label: 'A4 (210mm x 297mm)',
+    label: t('messages.exportOptions.pageSize.A4'),
     value: 'A4'
   }, {
-    label: 'A5 (148mm x 210mm)',
+    label: t('messages.exportOptions.pageSize.A5'),
     value: 'A5'
   }, {
-    label: 'US Legal (8.5" x 13")',
+    label: t('messages.exportOptions.pageSize.Legal'),
     value: 'Legal'
   }, {
-    label: 'US Letter (8.5" x 11")',
+    label: t('messages.exportOptions.pageSize.Letter'),
     value: 'Letter'
   }, {
-    label: 'Tabloid (17" x 11")',
+    label: t('messages.exportOptions.pageSize.Tabloid'),
     value: 'Tabloid'
   }, {
-    label: 'Custom',
+    label: t('messages.exportOptions.pageSize.Custom'),
     value: 'custom'
   }
 ]
 
-export const headerFooterTypes = [
+export const buildHeaderFooterTypeOptions = (t) => [
   {
-    label: 'None',
+    label: t('messages.exportOptions.headerFooterType.none'),
     value: 0
   }, {
-    label: 'Single cell',
+    label: t('messages.exportOptions.headerFooterType.singleCell'),
     value: 1
   }, {
-    label: 'Three cells',
+    label: t('messages.exportOptions.headerFooterType.threeCells'),
     value: 2
   }
 ]
 
-export const headerFooterStyles = [
+export const buildHeaderFooterStyleOptions = (t) => [
   {
-    label: 'Default',
+    label: t('messages.exportOptions.headerFooterStyle.default'),
     value: 0
   }, {
-    label: 'Simple',
+    label: t('messages.exportOptions.headerFooterStyle.simple'),
     value: 1
   }, {
-    label: 'Styled',
+    label: t('messages.exportOptions.headerFooterStyle.styled'),
     value: 2
   }
 ]
 
-export const exportThemeList = [{
-  label: 'Academic',
+export const buildExportThemeOptions = (t) => [{
+  label: t('messages.exportOptions.exportTheme.Academic'),
   value: 'academic'
 }, {
-  label: 'GitHub (Default)',
+  label: t('messages.exportOptions.exportTheme.GitHub'),
   value: 'default'
 }, {
-  label: 'Liber',
+  label: t('messages.exportOptions.exportTheme.Liber'),
   value: 'liber'
 }]

@@ -113,6 +113,51 @@
       "insertParagraphAfter": "Insert Paragraph After",
       "spelling": "Spelling..."
     },
+    "contextMenuTabs": {
+      "close": "Close",
+      "closeOthers": "Close others",
+      "closeSavedTabs": "Close saved tabs",
+      "closeAllTabs": "Close all tabs",
+      "rename": "Rename",
+      "copyPath": "Copy path",
+      "showInFolder": "Show in folder"
+    },
+    "contextMenuSidebar": {
+      "newFile": "New File",
+      "newDirectory": "New Directory",
+      "copy": "Copy",
+      "cut": "Cut",
+      "paste": "Paste",
+      "rename": "Rename",
+      "moveToTrash": "Move To Trash",
+      "showInFolder": "Show In Folder"
+    },
+    "exportOptions": {
+      "pageSize": {
+        "A3": "A3 (297mm x 420mm)",
+        "A4": "A4 (210mm x 297mm)",
+        "A5": "A5 (148mm x 210mm)",
+        "Legal": "US Legal (8.5\" x 13\")",
+        "Letter": "US Letter (8.5\" x 11\")",
+        "Tabloid": "Tabloid (17\" x 11\")",
+        "Custom": "Custom"
+      },
+      "headerFooterType": {
+        "none": "None",
+        "singleCell": "Single cell",
+        "threeCells": "Three cells"
+      },
+      "headerFooterStyle": {
+        "default": "Default",
+        "simple": "Simple",
+        "styled": "Styled"
+      },
+      "exportTheme": {
+        "Academic": "Academic",
+        "GitHub": "GitHub (Default)",
+        "Liber": "Liber"
+      }
+    },
     "status": {
       "loading": "Loading...",
       "saving": "Saving...",
